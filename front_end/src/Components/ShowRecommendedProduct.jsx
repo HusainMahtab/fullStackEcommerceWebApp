@@ -84,7 +84,7 @@ function ShowRecommendedProduct({category,heading}) {
                     <div className="px-4">
                        <div className='w-full flex justify-between items-center pt-6'>
                           <h2 className='text-lg md:font-medium font-base text-ellipsis line-clamp-1 text-black'>{ele?.productName}</h2>
-                          <div className='w-12 h-12 mx-4 rounded-full bg-yellow-800 text-white flex justify-center items-center text-sm'>
+                          <div className='w-12 h-12 mx-4 rounded-full bg-gray-600 text-white flex justify-center items-center text-sm'>
                             <p className='font-bold grid place-items-center'>{((ele?.price - ele?.sellingPrice) / ele?.price * 100).toFixed(1)}%<p>OOF</p></p>
                           </div> 
                        </div>                      
@@ -95,8 +95,8 @@ function ShowRecommendedProduct({category,heading}) {
                        </div>
                       
                       <div className="flex gap-4 py-4">
-                         <button className='px-3 py-1 border-2 border-yellow-800 text-yellow-800 hover:bg-yellow-800 hover:text-white rounded-lg font-bold text-lg' onClick={(e)=>handleAddToCart(e,ele?._id,user)}>Add to Cart</button>
-                         <button className='px-3 py-1 border-2 border-yellow-800 bg-yellow-800 text-white hover:bg-yellow-700 rounded-lg font-bold text-lg'>Buy Now</button> 
+                         <button className='px-3 py-1 border-2 border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white rounded-lg font-bold text-lg' onClick={(e)=>handleAddToCart(e,ele?._id,user)}>Add to Cart</button>
+                         <button className='px-3 py-1 border-2 border-gray-600 bg-gray-600 text-white hover:bg-gray-700 rounded-lg font-bold text-lg'>Buy Now</button> 
                       </div>
                     
                     </div>

@@ -12,7 +12,7 @@ function Login() {
     const [formData,setformData]=useState({email:"",password:""})
     const navigate=useNavigate()
     const {fetchUserDetails,countAddToCartItem}=useContext(Context)
-    console.log("fetchUserDetails",fetchUserDetails())
+    //console.log("fetchUserDetails",fetchUserDetails())
 
     const handleChange=(e)=>{
         const {name,value}=e.target
@@ -32,15 +32,9 @@ function Login() {
         const login_data=await axios.post("http://localhost:3000/api/v1/users/login",formData,{withCredentials: true,})
         //console.log("login data:",login_data)
         toast.success(login_data.data.message)
-        // setTimeout(()=>{
-         
-        // },2000)
-        if(login_data.success===true){
-           navigate("/")
-        }
+        navigate("/")
         fetchUserDetails()
         countAddToCartItem()
-        
       } catch (error) {
         toast.error("Invalid Email or Password !")
         console.log("error while login user",error)

@@ -5,7 +5,7 @@ const addToCart=async(e,_id,user)=>{
     e?.stopPropagation();
    try {
   
-     const response= await axios.post("http://localhost:3000/api/v1/carts/addToCart",
+     const response= await axios.post(`http://localhost:3000/api/v1/carts/addToCart`,
         {
           productId:_id,
           userId:user._id,
@@ -20,7 +20,7 @@ const addToCart=async(e,_id,user)=>{
      
    } catch (error) {
       console.error("error while add to cart product",error)
-      toast.error("product Already Added")
+      toast.error("product Already Added, or you not login!")
    }
 }
 

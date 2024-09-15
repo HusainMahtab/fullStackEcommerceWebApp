@@ -170,7 +170,7 @@ const handleOutImage=()=>{
               <p className='md:text-3xl text-2xl font-medium'>{data?.productName}</p>
               <p className='text-slate-400'>{data?.category}</p>
               <div className='flex items-center gap-2 py-2'>
-                 <div className='flex text-yellow-700 text-2xl'>
+                 <div className='flex text-gray-700 text-2xl'>
                   <IoIosStar/>
                   <IoIosStar/>
                   <IoIosStar/>
@@ -185,8 +185,8 @@ const handleOutImage=()=>{
                 <p className="line-through text-slate-400">{displayINRCurrency(data.price)}</p>
               </div>
               <div className='flex gap-2 mt-2'>
-                 <button className='border-2 border-yellow-800 bg-yellow-800 hover:bg-yellow-700 text-white rounded-lg px-3 py-1 font-bold'>Buy Now</button>
-                 <button className='border-2 border-yellow-800 text-yellow-800 hover:bg-yellow-800 hover:text-white rounded-lg px-3 py-1 font-bold' onClick={(e)=>addToCart(e,data._id,user)}>Add To Cart</button>
+                 <button className='border-2 border-gray-600 bg-gray-600 hover:bg-gray-700 text-white rounded-lg px-3 py-1 font-bold'>Buy Now</button>
+                 <button className='border-2 border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white rounded-lg px-3 py-1 font-bold' onClick={(e)=>addToCart(e,data._id,user)}>Add To Cart</button>
               </div>
               <div>
                 <p className='text-slate-600 font-medium my-1'>Descriptions :</p>

@@ -78,7 +78,7 @@ const handleDecressQuantity = async (_id, qty) => {
 // handle remove product
 const handleRemoveProduct=async(_id)=>{
    try {
-      const response=await axios.post("http://localhost:3000/api/v1/users/delete_addtocart_product",{_id},{withCredentials:true})
+      const response=await axios.post(`http://localhost:3000/api/v1/users/delete_addtocart_product`,{_id},{withCredentials:true})
       console.log("delete response",response)
       addToCart()
       setIsModalOpen(false)  

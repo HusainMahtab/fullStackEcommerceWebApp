@@ -90,7 +90,7 @@ function ShowCategoryWiseProduct({category,heading}) {
                     <div className="">
                        <div className='w-full flex justify-evenly items-center'>
                           <h2 className='text-lg md:font-medium font-base text-ellipsis line-clamp-1 text-black'>{ele?.productName}</h2>
-                          <div className='w-8 h-8 rounded-full bg-yellow-800 text-white p-[18px] mx-1 flex justify-center items-center text-xs'>
+                          <div className='w-8 h-8 rounded-full bg-gray-600 text-white p-[18px] mx-1 flex justify-center items-center text-xs'>
                             <p className='font-bold grid place-items-center'>{Math.round(((ele?.price-ele.sellingPrice)/ele?.price)*100)}%<p>OOF</p></p>
                           </div> 
                        </div>                      
@@ -100,8 +100,8 @@ function ShowCategoryWiseProduct({category,heading}) {
                           <p className='text-slate-500 md:text-sm line-through'>{displayINRCurrency(ele?.price)}</p>
                        </div>
                        <div className="grid gap-2 py-2">
-                         <button className='border-2 border-yellow-800 text-yellow-800 hover:bg-yellow-800 hover:text-white rounded-lg px-3 py-1 font-bold w-[116px]' onClick={(e)=>handleAddToCart(e,ele?._id,user)}>Add to Cart</button>
-                         <button className='border-2 border-yellow-800 bg-yellow-800 text-white hover:bg-yellow-700 rounded-lg px-3 py-1 font-bold w-[115px]'>Buy Now</button>
+                         <button className='border-2 border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white rounded-lg px-3 py-1 font-bold w-[116px]' onClick={(e)=>handleAddToCart(e,ele?._id,user)}>Add to Cart</button>
+                         <button className='border-2 border-gray-600 bg-gray-600 text-white hover:bg-gray-700 rounded-lg px-3 py-1 font-bold w-[115px]'>Buy Now</button>
                        </div>
                     </div>
                   </Link>
