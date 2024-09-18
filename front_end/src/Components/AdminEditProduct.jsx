@@ -75,7 +75,7 @@ function AdminEditProduct({onClose,Data,fetchAllProduct}) {
      const handleEditProduct=async(e)=>{
       e.preventDefault()
       try {
-        const respose= await axios.put(`http://localhost:3000/api/v1/products/updateProduct/${Data._id}`,productData,{withCredentials:true})
+        const respose= await axios.put(`${import.meta.env.BASE_URL}/api/v1/products/updateProduct/${Data._id}`,productData,{withCredentials:true})
         console.log("edit product response",respose)
         toast.success(respose.data.message)
        
