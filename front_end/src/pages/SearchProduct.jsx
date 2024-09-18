@@ -10,7 +10,7 @@ function SearchProduct() {
 
     const searchProduct=async()=>{
         try {
-            const response=await axios.get(`${import.meta.env.BASE_URL}/api/v1/products/search-products`+query.search)
+            const response=await axios.get(`http://localhost:3000/api/v1/products/search-products`+query.search)
             setData(response.data.data.product)
            console.log(response)
            setLoading(false)

@@ -19,7 +19,7 @@ function ShowCategoryWiseProduct({category,heading}) {
     const {countAddToCartItem}=useContext(Context)
     const fetchData = async () => {
       try {
-        const categoryProduct = await axios.get(`${import.meta.env.BASE_URL}/api/v1/products/categoryProduct`, {
+        const categoryProduct = await axios.get(`http://localhost:3000/api/v1/products/categoryProduct`, {
           params: { category },
           withCredentials: true
         });

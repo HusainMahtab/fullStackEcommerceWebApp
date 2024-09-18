@@ -5,7 +5,7 @@ const addToCart=async(e,_id,user)=>{
     e?.stopPropagation();
    try {
   
-     const response= await axios.post(`${import.meta.env.BASE_URL}/api/v1/carts/addToCart`,
+     const response= await axios.post(`http://localhost:3000/api/v1/carts/addToCart`,
         {
           productId:_id,
           userId:user._id,

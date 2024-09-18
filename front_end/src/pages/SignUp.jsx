@@ -44,7 +44,7 @@ function SignUp() {
          //console.log(formData.userName,formData.email,formData.profilePic,formData.password)
          
       try {
-         const signup_api=await axios.post(`${import.meta.env.BASE_URL}/api/v1/users/signup`,formData,{withCredentials:true})
+         const signup_api=await axios.post(`${.BASE_URL}/api/v1/users/signup`,formData,{withCredentials:true})
          //console.log(signup_api.data)
          toast.success(`${signup_api.data.message}`)
          setTimeout(()=>{
