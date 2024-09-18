@@ -50,7 +50,7 @@ function App() {
   // count addTCart Product
   const countAddToCartItem=async()=>{
     try {
-     const response=await axios.get("http://localhost:3000/api/v1/users/count_addtocart_product",{withCredentials:true})
+     const response=await axios.get(`http://localhost:3000/api/v1/users/count_addtocart_product`,{withCredentials:true})
      console.log("count add to cart product",response.data.data)
      setCountAddToCartProduct(response?.data?.data)
     } catch (error) {

@@ -7,7 +7,7 @@ function CategoryList() {
     const loaderList=new Array(14).fill(null)
    const getCategoryProduct=async()=>{
       try {
-         const response=await axios.get("http://localhost:3000/api/v1/products/getProductCategory",{withCredentials:true})
+         const response=await axios.get(`http://localhost:3000/api/v1/products/getProductCategory`,{withCredentials:true})
          setCategoryProduct(response.data.data)
          setLoader(false)
          //console.log("product category",response)

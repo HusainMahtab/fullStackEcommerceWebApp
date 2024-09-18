@@ -12,9 +12,16 @@ function Footer() {
             <div className="w-full">
               <h2 className='text-xl font-bold'>Other Products</h2>
               <Link onClick={()=>window.open("https://school-website-theta-three.vercel.app/","_blank")} className='text-white font-semibold border-b-2 border-transparent hover:border-white transition-all duration-300'>schoolwebSite</Link>
-
             </div>
-             <div className="bg-blue-400 w-full h-full">sdf</div>
+             <div className="w-full grid justify-center place-content-center">
+                <h2 className='text-xl font-bold text-white'>Developer</h2>
+                <Link to={"/about_me"} className='text-md w-fit font-semibold text-white border-b-2 border-transparent hover:border-white transition-all duration-300'>
+                   About-Me
+                </Link>
+                <Link to={"/contact_me"} className='text-md w-fit font-semibold text-white border-b-2 border-transparent hover:border-white transition-all duration-300'>
+                  Contact-Me
+                </Link>
+             </div>
              <div className="w-full grid gap-2 justify-center ">
                 <Link  onClick={() => window.open("https://github.com/HusainMahtab", "_blank")} className='flex items-center gap-2 border-b-2 border-transparent hover:border-white transition-all duration-300'>
                   <FaSquareGithub className='text-2xl font-bold'/> 

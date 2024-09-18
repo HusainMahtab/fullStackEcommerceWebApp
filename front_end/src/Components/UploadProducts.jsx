@@ -73,7 +73,7 @@ function UploadProducts({onClose,fetchAllData}) {
  const handleSubmitProduct=async(e)=>{
   e.preventDefault()
   try {
-    const respose= await axios.post("http://localhost:3000/api/v1/products/createProduct",productData,{withCredentials:true})
+    const respose= await axios.post(`http://localhost:3000/api/v1/products/createProduct`,productData,{withCredentials:true})
      console.log("creating product response",respose)
     toast.success("Product created Successfully")
     

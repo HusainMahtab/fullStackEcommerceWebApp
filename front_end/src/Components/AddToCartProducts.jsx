@@ -16,7 +16,7 @@ function AddToCartProducts() {
   const {countAddToCartItem}=useContext(Context)
   const addToCart=async()=>{
     try {
-        const response=await axios.get("http://localhost:3000/api/v1/users/view_addtocart_products",{withCredentials:true})
+        const response=await axios.get(`http://localhost:3000/api/v1/users/view_addtocart_products`,{withCredentials:true})
         //console.log("add to cart response",response.data.data)
         setAddedProducts(response.data.data)
         setLoading(false)
@@ -38,7 +38,7 @@ function AddToCartProducts() {
   setAddedProducts(updatedProducts);
   try {
     const response = await axios.post(
-      "http://localhost:3000/api/v1/users/update_addtocart_product",
+      `http://localhost:3000/api/v1/users/update_addtocart_product`,
       { quantity: qty + 1, _id },
       { withCredentials: true }
     );
@@ -61,7 +61,7 @@ const handleDecressQuantity = async (_id, qty) => {
     
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/users/update_addtocart_product",
+        `http://localhost:3000/api/v1/users/update_addtocart_product`,
         { quantity: qty - 1, _id },
         { withCredentials: true }
       );
