@@ -10,14 +10,14 @@ dotenv.config({path:"./.env"})
 const app=express()
 
 app.use(cors({
-    origin:"https://fullstackecommercewebapp-1-front-end.onrender.com",
-    credentials:true
-}))
-
-app.options('*', cors({
-    origin: "https://fullstackecommercewebapp-1-front-end.onrender.com",    
-    credentials: true
+    origin: "https://fullstackecommercewebapp-1-front-end.onrender.com",
+    credentials: true, // Allow cookies and credentials
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow these methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Ensure headers are allowed
   }));
+  
+  // Handle OPTIONS preflight requests automatically
+  app.options('*', cors());
 
 // connect to DB
 connectDb().then(()=>{
