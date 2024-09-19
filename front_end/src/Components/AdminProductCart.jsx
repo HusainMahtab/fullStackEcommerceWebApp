@@ -16,7 +16,7 @@ function AdminProductCart({ productData, fetchAllProduct }) {
     //console.log("productid", productId);
 
     try {
-      const response = await axios.delete(`http://localhost:3000/api/v1/products/deleteProduct/${productId}`, { withCredentials: true });
+      const response = await axios.delete(`https://fullstackecommercewebapp.onrender.com/api/v1/products/deleteProduct/${productId}`, { withCredentials: true });
       toast.success(response.data.message);
       fetchAllProduct();
     } catch (error) {

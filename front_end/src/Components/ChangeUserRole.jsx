@@ -21,7 +21,7 @@ function ChangeUserRole({
 
   const updateUsersRole=async()=>{
     try {
-       const responce=await axios.put(`$http://localhost:3000/api/v1/users/update_user`,{role:userRole,_id,email,userName},{withCredentials:true})
+       const responce=await axios.put(`https://fullstackecommercewebapp.onrender.com/api/v1/users/update_user`,{role:userRole,_id,email,userName},{withCredentials:true})
        console.log("update role responce",responce)
        onClose()
        toast.success(responce.data.message)
