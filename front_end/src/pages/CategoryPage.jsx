@@ -20,7 +20,7 @@ function CategoryPage() {
     const [sortBy,setSortBy]=useState("")
     const showProductWithCategory=async()=>{
       try {
-        const respnose=await axios.get(`https://fullstackecommercewebapp.onrender.com/api/v1/products/filterProduct`,{
+        const respnose=await axios.get(`https://fullstackecommercewebapp-back-end.onrender.com/api/v1/products/filterProduct`,{
           params: {
              category: filterCategoryList
           },

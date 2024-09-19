@@ -10,7 +10,7 @@ function AllProducts() {
   const [loading,setLoading]=useState(true)
 
   const getAllProducts=async()=>{
-    const response= await axios.get(`https://fullstackecommercewebapp.onrender.com/api/v1/products/allProducts`)
+    const response= await axios.get(`https://fullstackecommercewebapp-back-end.onrender.com/api/v1/products/allProducts`)
     setAllProducts(response.data.data)
     setLoading(false)
     console.log("all product response",response)

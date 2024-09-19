@@ -19,7 +19,7 @@ function ShowCategoryWiseProduct({category,heading}) {
     const {countAddToCartItem}=useContext(Context)
     const fetchData = async () => {
       try {
-        const categoryProduct = await axios.get(`https://fullstackecommercewebapp.onrender.com/api/v1/products/categoryProduct`, {
+        const categoryProduct = await axios.get(`https://fullstackecommercewebapp-back-end.onrender.com/api/v1/products/categoryProduct`, {
           params: { category },
           withCredentials: true
         });

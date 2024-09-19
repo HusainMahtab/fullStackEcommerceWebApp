@@ -26,7 +26,7 @@ const user=useSelector(state=>state?.user?.user)
 
  const handleLogout=async()=>{
       try {
-      const logOutApi=await axios.post(`https://fullstackecommercewebapp.onrender.com/api/v1/users/log_out`,{},{withCredentials:true})   
+      const logOutApi=await axios.post(`https://fullstackecommercewebapp-back-end.onrender.com/api/v1/users/log_out`,{},{withCredentials:true})   
         toast.success(`${logOutApi.data.message}`)
         dispatch(setUserDetails(null))
         navigate("/")

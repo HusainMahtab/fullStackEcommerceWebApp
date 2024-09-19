@@ -20,7 +20,7 @@ function AllUsers() {
 
  const getAllUsers=async()=>{
      try {
-         const responce=await axios.get(`https://fullstackecommercewebapp.onrender.com/api/v1/users/all_users`,{withCredentials:true})
+         const responce=await axios.get(`https://fullstackecommercewebapp-back-end.onrender.com/api/v1/users/all_users`,{withCredentials:true})
          console.log("GetAllUsers",responce.data.data)
          setgetUser(responce?.data?.data)
          setLoading(false)

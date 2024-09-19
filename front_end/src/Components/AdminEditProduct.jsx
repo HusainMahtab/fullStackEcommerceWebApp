@@ -75,7 +75,7 @@ function AdminEditProduct({onClose,Data,fetchAllProduct}) {
      const handleEditProduct=async(e)=>{
       e.preventDefault()
       try {
-        const respose= await axios.put(`https://fullstackecommercewebapp.onrender.com/api/v1/products/updateProduct/${Data._id}`,productData,{withCredentials:true})
+        const respose= await axios.put(`https://fullstackecommercewebapp-back-end.onrender.com/api/v1/products/updateProduct/${Data._id}`,productData,{withCredentials:true})
         console.log("edit product response",respose)
         toast.success(respose.data.message)
        
