@@ -91,9 +91,9 @@ const signUp=AsyncHandler(async(req,res,)=>{
     const loggedInUser=await User.findById(user._id).select('-password -refreshToken')
     
     const options = {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
-        sameSite: 'strict', // This prevents CSRF attacks
+        httpOnly: true,                   
+        secure: process.env.NODE_ENV === 'production',  
+        sameSite: 'None',                 
       };
 
     return res
