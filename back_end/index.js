@@ -10,7 +10,7 @@ dotenv.config({path:"./.env"})
 const app=express()
 
 app.use(cors({
-    origin:"*",
+    origin:"https://fullstackecommercewebapp-1-front-end.onrender.com/",
     credentials:true
 }))
 
