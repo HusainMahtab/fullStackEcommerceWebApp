@@ -26,20 +26,21 @@ function Login() {
     }
     //sconsole.log("data",formData)
 
-    const handleSubmit=async(e)=>{
-      e.preventDefault()
-      try {
-        const login_data=await axios.post(`https://fullstackecommercewebapp-back-end.onrender.com/api/v1/users/login`,formData,{withCredentials: true,})
-        //console.log("login data:",login_data)
-        toast.success(login_data.data.message)
-        navigate("/")
-        fetchUserDetails()
-        countAddToCartItem()
-      } catch (error) {
-        toast.error("Invalid Email or Password !")
-        console.log("error while login user",error)
-      }
-    }
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+    try {
+    const login_data = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/users/login`, formData, {
+      withCredentials: true, // Ensure cookies are sent with the request
+    });
+    toast.success(login_data.data.message);
+    fetchUserDetails(); // Fetch user details after login
+    countAddToCartItem(); // Count items in the cart
+    navigate("/"); // Navigate to the home page
+   } catch (error) {
+    toast.error("Invalid Email or Password !");
+    console.log("error while logging in user", error);
+  }
+};
   return (
     <section id='login'>
         <div className="flex justify-center items-center w-full h-[70vh]">

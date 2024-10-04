@@ -178,7 +178,7 @@ const getCategoryWiseProduct=AsyncHandler(async(req,res)=>{
     if(!product.length){
         throw new ApiError(403,"not found any product in db")
     }
-    console.log("products",product)
+    //console.log("products",product)
     return res
     .status(200)
     .json(new ApiResponse(200,{product},"product category found successfully"))
@@ -233,7 +233,7 @@ const searchProduct=AsyncHandler(async(req,res)=>{
 // filter products
 const filterProduct=AsyncHandler(async(req,res)=>{
     const categoryList=req?.query?.category
-    console.log("categoryList",categoryList)
+    //console.log("categoryList",categoryList)
     if(!categoryList){
         throw new ApiError(404,"category not found!")
     }

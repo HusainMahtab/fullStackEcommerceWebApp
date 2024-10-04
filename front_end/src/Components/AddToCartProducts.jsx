@@ -16,7 +16,7 @@ function AddToCartProducts() {
   const {countAddToCartItem}=useContext(Context)
   const addToCart=async()=>{
     try {
-        const response=await axios.get(`https://fullstackecommercewebapp-back-end.onrender.com/api/v1/users/view_addtocart_products`,{withCredentials:true})
+        const response=await axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/users/view_addtocart_products`,{withCredentials:true})
         //console.log("add to cart response",response.data.data)
         setAddedProducts(response.data.data)
         setLoading(false)
@@ -38,7 +38,7 @@ function AddToCartProducts() {
   setAddedProducts(updatedProducts);
   try {
     const response = await axios.post(
-      `https://fullstackecommercewebapp-back-end.onrender.com/api/v1/users/update_addtocart_product`,
+      `${import.meta.env.VITE_BASE_URL}/api/v1/users/update_addtocart_product`,
       { quantity: qty + 1, _id },
       { withCredentials: true }
     );
@@ -61,7 +61,7 @@ const handleDecressQuantity = async (_id, qty) => {
     
     try {
       const response = await axios.post(
-        `https://fullstackecommercewebapp-back-end.onrender.com/api/v1/users/update_addtocart_product`,
+        `${import.meta.env.VITE_BASE_URL}/api/v1/users/update_addtocart_product`,
         { quantity: qty - 1, _id },
         { withCredentials: true }
       );
@@ -78,7 +78,7 @@ const handleDecressQuantity = async (_id, qty) => {
 // handle remove product
 const handleRemoveProduct=async(_id)=>{
    try {
-      const response=await axios.post(`https://fullstackecommercewebapp-back-end.onrender.com/api/v1/users/delete_addtocart_product`,{_id},{withCredentials:true})
+      const response=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/users/delete_addtocart_product`,{_id},{withCredentials:true})
       console.log("delete response",response)
       addToCart()
       setIsModalOpen(false)  
@@ -159,7 +159,7 @@ const totalPrice=addedProducts.reduce((pre,current)=>(pre+current?.quantity*curr
          </div>
 
         {/*product summary */}
-        <div className="flex justify-center md:w-[60%]">
+        <div className="flex justify-center md:w-[60%] p-2">
           <div className='mt-5 lg:mt-0 w-full max-w-sm'>
            {  
               loading ? (
@@ -167,7 +167,7 @@ const totalPrice=addedProducts.reduce((pre,current)=>(pre+current?.quantity*curr
                 
                </div>
               ): (
-                <div className='h-36 bg-white rounded-lg shadow-lg mt-4'>
+                <div className='h-36 bg-white rounded-lg shadow-lg mt-4 mb-4'>
                   <h2 className="text-white bg-gray-600 px-4 py-1">Summary</h2>
                   <div className='flex items-center justify-between px-4 gap-2 font-bold text-lg text-green-700'>
                     <p className='text-gray-600'>Quantity:</p>

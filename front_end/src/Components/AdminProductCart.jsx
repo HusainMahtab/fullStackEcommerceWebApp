@@ -16,7 +16,7 @@ function AdminProductCart({ productData, fetchAllProduct }) {
     //console.log("productid", productId);
 
     try {
-      const response = await axios.delete(`https://fullstackecommercewebapp-back-end.onrender.com/api/v1/products/deleteProduct/${productId}`, { withCredentials: true });
+      const response = await axios.delete(`${import.meta.env.VITE_BASE_URL}/api/v1/products/deleteProduct/${productId}`, { withCredentials: true });
       toast.success(response.data.message);
       fetchAllProduct();
     } catch (error) {

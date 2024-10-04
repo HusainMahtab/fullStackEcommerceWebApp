@@ -30,20 +30,21 @@ function AdminPanel() {
                 ):(<FaUserCircle className='hover:text-gray-600' />)
                }
             </div>
-            <p className='capitalize text-lg front font-semibold '>{user?.userName}</p>
-            <p className='text-sm'>{user?.role}</p>
+            <p className='capitalize text-lg front font-semibol '>{user?.userName}</p>
+            <p className='text-sm text-slate-500'>{user?.role}</p>
             {/* <p>{user?.email}</p> */}
           </div>
 
           {/* navigation */}
           <div>
              <nav className='flex flex-col justify-center p-4 '>
-                <Link to="all_users" className='py-1 hover:bg-slate-100 px-2 rounded-md'>All Users</Link>
-                <Link to="all_product" className='py-1 hover:bg-slate-100 px-2 rounded-md' >All Product</Link>
+                <Link to="all_users" className='py-1 hover:bg-slate-100 px-2 rounded-md font-serif'>All Users</Link>
+                <Link to="all_product" className='py-1 hover:bg-slate-100 px-2 rounded-md font-serif' >All Product</Link>
+                <Link to="all_user_messages" className='py-1 hover:bg-slate-100 px-2 rounded-md font-serif' >All Users Messages</Link>
              </nav>
           </div>
         </aside>
-        <main className='bg-slate-100 w-full h-full p-2 overflow-scroll mr-2'>
+        <main className='bg-slate-100 w-full h-full p-2 overflow-scroll overflow-x-hidden mr-2'>
               <Outlet/>
         </main> 
     </div>

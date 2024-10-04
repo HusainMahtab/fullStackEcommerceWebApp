@@ -18,16 +18,21 @@ import { useDispatch } from 'react-redux';
 import { setUserDetails } from './store/userSlice';
 import AddToCartProducts from './Components/AddToCartProducts';
 import SearchProduct from './pages/SearchProduct';
-
+import AboutMe from './Components/AboutMe';
+import ContactMe from './Components/ContactMe';
+import AllUserMessages from './Components/AllUserMessages';
 function App() {
   const dispatch = useDispatch();
   const [countAddtoCartProduct,setCountAddToCartProduct]=useState(0)
   const fetchUserDetails = async () => {
     try {
-      const token = localStorage.getItem('token');
-      
+      const token = localStorage.getItem('AccessToken');
+       console.log("Tokens",token)
+       if(!token){
+        console.log("token is not found local storage")
+       }
       const response = await axios.get(
-        `https://fullstackecommercewebapp-back-end.onrender.com/api/v1/users/profile`,
+        `${import.meta.env.VITE_BASE_URL}/api/v1/users/profile`,
         { 
           withCredentials: true,
           headers: {
@@ -44,13 +49,13 @@ function App() {
   };
 
   useEffect(() => {
-    fetchUserDetails();
+     fetchUserDetails();
   }, []);
 
   // count addTCart Product
   const countAddToCartItem=async()=>{
     try {
-     const response=await axios.get(`https://fullstackecommercewebapp-back-end.onrender.com/api/v1/users/count_addtocart_product`,{withCredentials:true})
+     const response=await axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/users/count_addtocart_product`,{withCredentials:true})
      console.log("count add to cart product",response.data.data)
      setCountAddToCartProduct(response?.data?.data)
     } catch (error) {
@@ -81,11 +86,14 @@ function App() {
               <Route path="/admin_panel" element={<AdminPanel />}>
                 <Route path="all_users" element={<AllUsers />} />
                 <Route path="all_product" element={<AllProducts />} />
+                <Route path='all_user_messages' element={<AllUserMessages/>}/>
               </Route>
               <Route path='/product_category' element={<CategoryPage/>}/>
               <Route path='/product/:_id' element={<ProductDetails/>}/>
               <Route path='/addToCart-products' element={<AddToCartProducts/>}/>
               <Route path='/search-products' element={<SearchProduct/>}/>
+              <Route path='/about_me' element={<AboutMe/>}/>
+              <Route path='/contact_me' element={<ContactMe/>}/>
             </Routes>
           </main>
           <Footer />

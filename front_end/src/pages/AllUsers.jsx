@@ -20,7 +20,7 @@ function AllUsers() {
 
  const getAllUsers=async()=>{
      try {
-         const responce=await axios.get(`https://fullstackecommercewebapp-back-end.onrender.com/api/v1/users/all_users`,{withCredentials:true})
+         const responce=await axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/users/all_users`,{withCredentials:true})
          console.log("GetAllUsers",responce.data.data)
          setgetUser(responce?.data?.data)
          setLoading(false)
@@ -36,7 +36,7 @@ function AllUsers() {
   
 
   return (
-    <div className='bg-white pb-4 w-full flex items-center'>
+    <div className='bg-white pb-4 w-full flex items-center overflow-x-hidden'>
       <table className='w-full userTable'>
         <thead>
           <tr className='bg-gray-800 text-white'>
@@ -74,8 +74,8 @@ function AllUsers() {
                   <td className='cursor-pointer text-blue-700 hover:text-blue-800'>
                     <button>
                      <FaUserEdit className='text-xl' onClick={()=>{
-                      setUpdateUserDetails(ele)
-                      setOpenUpdateRole(true)
+                       setUpdateUserDetails(ele)
+                       setOpenUpdateRole(true)
                       }}/>
 
                     </button>

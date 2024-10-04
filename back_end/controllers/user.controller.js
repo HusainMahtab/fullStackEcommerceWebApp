@@ -85,7 +85,7 @@ const signUp=AsyncHandler(async(req,res,)=>{
     }
 
     const {accessToken,refreshToken}=await generateAccessTokenAndRefreshToken(user._id)
-    //console.log("accessToken:",accessToken)
+    console.log("accessToken:",accessToken)
    // console.log("refreshToken:",refreshToken)
     
     const loggedInUser=await User.findById(user._id).select('-password -refreshToken')

@@ -36,7 +36,7 @@ function ProductDetails() {
 
   const fetchedProductDetails=async()=>{
     try {
-       const response=await axios.post(`https://fullstackecommercewebapp-back-end.onrender.com/api/v1/products/productDetails`,params,{withCredentials:true})
+       const response=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/products/productDetails`,params,{withCredentials:true})
         //console.log("add to cart product",response)
        setData(response.data.data.product)
        //console.log("Data",data)
