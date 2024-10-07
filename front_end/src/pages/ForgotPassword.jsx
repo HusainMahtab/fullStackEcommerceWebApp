@@ -46,7 +46,7 @@ function ForgotPassword() {
            <p className='text-red-600'>enter that email when you are signing.</p>
          </div>
        </div>
-       <div className="w-[400px] shadow-md p-8 bg-slate-200">
+       <div className="w-[400px] shadow-md p-4 px-16 bg-slate-200">
           <form action="submit" onSubmit={handleSubmit} className='grid gap-2'>
             <div className='grid'>
               <label htmlFor="email" className='font-semibod '>Email:</label>
