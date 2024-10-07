@@ -10,7 +10,8 @@ import {
     countAddToCartProduct,
     viewAddToCartProduct,
     updateAddToCartProduct,
-    removeAddToCartProduct
+    removeAddToCartProduct,
+    forgotPassword
 } from "../controllers/user.controller.js";
 const router=Router()
 
@@ -25,6 +26,9 @@ router.route("/profile").get(authorizedUser,user_profile_details)
 
 // logOut user
 router.route("/log_out").post(authorizedUser,logOut)
+
+// forgot password
+router.route("/forgo_password").post(forgotPassword)
 
 // fetch all users
 router.route("/all_users").get(authorizedUser,allUser)

@@ -93,7 +93,7 @@ const signUp=AsyncHandler(async(req,res,)=>{
     const options = {
         httpOnly: true,                   
         secure: process.env.NODE_ENV === 'production',  
-        sameSite: 'None',                 
+        // sameSite: 'None',                 
       };
 
     return res
@@ -141,6 +141,32 @@ const logOut=AsyncHandler(async(req,res)=>{
      .json(new ApiResponse(200,{},"you are logout successfully"))
 
 
+})
+
+// forgot password
+const forgotPassword=AsyncHandler(async(req,res)=>{
+    const {email,newPassword,confirmPassword}=req.body
+    if(!email){
+        throw new ApiError(404,"user email not found!")
+    }
+    if(!newPassword){
+        throw new ApiError(404,"newPassword not found!")
+    }
+    if(!confirmPassword){
+        throw new ApiError(404,"confirmPasswored not found!")
+    }
+    const user=await User.findOne({email})
+    if(!user){
+        throw new ApiError(404,"user not found")
+    }
+    if(newPassword!==confirmPassword){
+        throw new ApiError(500,"password and confirm password is not equal")
+    }
+    user.password=confirmPassword
+    await user.save()
+    return res
+    .status(200)
+    .json(new ApiResponse(200,user,"Password changed successfully"))
 })
 
 // get all users
@@ -288,6 +314,7 @@ export {
     countAddToCartProduct,
     viewAddToCartProduct,
     updateAddToCartProduct,
-    removeAddToCartProduct
+    removeAddToCartProduct,
+    forgotPassword
 }
 

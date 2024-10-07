@@ -47,7 +47,7 @@ function Login() {
            <div className=" mx-auto container p-4 flex">
              <div className='bg-slate-100 p-2 w-full max-w-md mx-auto'>
                  <div className='w-20 h-20 rounded-full mx-auto'>
-                   <img src={userprofile} alt='profile logo'></img>
+                   <img src={userprofile} alt='profile logo' className='animate-bounce'></img>
                  </div>
                   <form onSubmit={handleSubmit} className='pt-4 mx-2'>
                      <div className='grid'>
