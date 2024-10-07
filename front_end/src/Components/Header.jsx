@@ -27,8 +27,8 @@ const user=useSelector(state=>state?.user?.user)
  const handleLogout=async()=>{
       try {
       const logOutApi=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/users/log_out`,{},{withCredentials:true})   
-        toast.success(`${logOutApi.data.message}`)
         dispatch(setUserDetails(null))
+        toast.success(`${logOutApi?.data?.message}`)
         navigate("/")
       } catch (error) {
         console.log("error while logout the user",error)
@@ -36,9 +36,6 @@ const user=useSelector(state=>state?.user?.user)
       }
   }
 
-  //console.log("search input",mobileSearchInput?.search.split("=")[1])
-  
-  //console.log("add to cart count",context)s
   const handleSearchProduct=(e)=>{
     const {value}=e.target
     setMobileSearch(value)

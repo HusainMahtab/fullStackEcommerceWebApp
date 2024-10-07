@@ -83,7 +83,7 @@ const handleRemoveProduct=async(_id)=>{
       addToCart()
       setIsModalOpen(false)  
       toast.success("Removed successfully")
-      await countAddToCartItem()
+      countAddToCartItem()
    } catch (error) {
      console.error("error while removing addtocart product",error)
      toast.error("product not removed,something is wrong!")
@@ -109,7 +109,7 @@ const totalPrice=addedProducts.reduce((pre,current)=>(pre+current?.quantity*curr
     <div className='container mx-auto mb-2'>
         <div className='text-center text-lg my-3'>
            {
-            addedProducts.length===0 && loading &&(
+            addedProducts.length===0 && !loading &&(
              <p className='bg-white shadow-lg py-5'>No Cart Items</p>
            )
            } 

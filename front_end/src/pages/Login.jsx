@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useState } from 'react';
 import userprofile from "../assets/user profile.png"
 import { IoEye } from "react-icons/io5"; // open eye icon
@@ -28,19 +28,22 @@ function Login() {
 
   const handleSubmit = async (e) => {
       e.preventDefault();
+      countAddToCartItem(0)
     try {
     const login_data = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/users/login`, formData, {
       withCredentials: true, // Ensure cookies are sent with the request
     });
-    toast.success(login_data.data.message);
+    //console.log("logindata",login_data)
+    toast.success(`${login_data.data.data.user.role} login sucessfully`);
     fetchUserDetails(); // Fetch user details after login
-    countAddToCartItem(); // Count items in the cart
+    countAddToCartItem()
     navigate("/"); // Navigate to the home page
    } catch (error) {
     toast.error("Invalid Email or Password !");
     console.log("error while logging in user", error);
   }
 };
+
   return (
     <section id='login'>
         <div className="flex justify-center items-center w-full h-[70vh]">

@@ -5,6 +5,7 @@ import {ApiError} from "../utils/ApiError.js"
 import {AddToCart} from "../models/cartProduct.model.js"
 
 
+
 // generate access and refresh token
 const generateAccessTokenAndRefreshToken=async(userId)=>{
     try {
@@ -127,7 +128,6 @@ const logOut=AsyncHandler(async(req,res)=>{
             }
         }
      ,{new:true})
-    
 
      const options={
         httpOnly:true,
@@ -218,12 +218,12 @@ const countAddToCartProduct=AsyncHandler(async(req,res)=>{
     if(!userId){
         throw new ApiError(403,"userId not found!")
     }
-    const countProduct=await AddToCart.countDocuments({
+    let countProduct=await AddToCart.countDocuments({
         userId
     })
     console.log("count product",countProduct)
     if(!countProduct){
-        throw new ApiError(401," add to cart product not count!")
+      countProduct=0  
     }
     return res
     .status(200)

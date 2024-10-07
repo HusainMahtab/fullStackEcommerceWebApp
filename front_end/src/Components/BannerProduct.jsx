@@ -47,7 +47,7 @@ const BannerProduct=()=>{
     return(
         <div className="container mx-auto my-2 px-2">
             <div className="h-60 md:h-72 w-full bg-slate-200 relative overflow-hidden">
-              <div className="absolute z-10 w-full h-full md:flex items-center hidden">
+              <div className="absolute w-full h-full md:flex items-center hidden">
                  <div className="flex justify-between w-full text-2xl">
                    <button className="bg-white rounded-full mx-1 hover:bg-slate-300" onClick={previosBanner}><FaAngleLeft/></button>
                    <button className="bg-white rounded-full mx-1  hover:bg-slate-300" onClick={nextBanner}><FaAngleRight/></button>
