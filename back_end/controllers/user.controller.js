@@ -4,12 +4,12 @@ import {ApiResponse} from "../utils/ApiResponse.js"
 import {ApiError} from "../utils/ApiError.js"
 import {AddToCart} from "../models/cartProduct.model.js"
 
+
 // generate access and refresh token
 const generateAccessTokenAndRefreshToken=async(userId)=>{
     try {
         const user=await User.findById(userId)
         console.log("User:",user)
-        
         const accessToken=user.generateAccessToken()
         //console.log("accessToken:",accessToken)
         const refreshToken=user.generateRefreshToken()
@@ -20,7 +20,6 @@ const generateAccessTokenAndRefreshToken=async(userId)=>{
         console.log(error)
         throw new ApiError(500,"error while generating accessToken and refreshToken")
     }
-
 }
 
 // sign up users
@@ -93,7 +92,7 @@ const signUp=AsyncHandler(async(req,res,)=>{
     const options = {
         httpOnly: true,                   
         secure: process.env.NODE_ENV === 'production',  
-        // sameSite: 'None',                 
+        sameSite: 'None',                 
       };
 
     return res
