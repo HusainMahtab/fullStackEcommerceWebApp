@@ -50,12 +50,12 @@ function ForgotPassword() {
           <form action="submit" onSubmit={handleSubmit} className='grid gap-2'>
             <div className='grid'>
               <label htmlFor="email" className='font-semibod '>Email:</label>
-              <input type="email" id='email' name='email' value={formData.email} placeholder='enter your email' autoFocus className='p-2 rounded text-lg font-semibold outline-none' onChange={handleChange}/>
+              <input type="email" id='email' name='email' value={formData.email} placeholder='enter your email' autoFocus required className='p-2 rounded text-lg font-semibold outline-none' onChange={handleChange}/>
             </div>
             <div className='grid'>
               <label htmlFor="newPassword" className='font-semibod '>new password:</label>
               <div className='flex justify-between items-center gap-2'>
-                <input type={showNewPassword ? "text" : "password"} id='newPassword' name='newPassword' value={formData.newPassword} placeholder='new password' className='p-2  w-full rounded text-lg font-semibold outline-none' onChange={handleChange}/>
+                <input type={showNewPassword ? "text" : "password"} id='newPassword' name='newPassword' value={formData.newPassword} placeholder='new password' required className='p-2  w-full rounded text-lg font-semibold outline-none' onChange={handleChange}/>
                 <div onClick={()=>setShowNewPassword((pre)=>!pre)}>
                    {
                     showNewPassword ? (<IoEye className='text-2xl cursor-pointer'/>) :(<IoEyeOff className='text-2xl cursor-pointer'/>)
@@ -66,7 +66,7 @@ function ForgotPassword() {
             <div className='grid'>
               <label htmlFor="confirmPassword" className='font-semibod '>confirm password:</label>
                <div className='flex justify-between items-center gap-2'>
-                 <input type={showConfirmPassword ? "text" : "password"} id='confirmPassword' name='confirmPassword' value={formData.confirmPassword} placeholder='confirm password' className='p-2 w-full text-lg font-semibold rounded outline-none' onChange={handleChange}/>
+                 <input type={showConfirmPassword ? "text" : "password"} id='confirmPassword' name='confirmPassword' value={formData.confirmPassword} placeholder='confirm password' required className='p-2 w-full text-lg font-semibold rounded outline-none' onChange={handleChange}/>
                  <div onClick={()=>setConfirmPassword((prev)=>!prev)}>
                     {
                       showConfirmPassword ? (<IoEye className='text-2xl cursor-pointer'/>) : (<IoEyeOff className='text-2xl cursor-pointer'/>)
