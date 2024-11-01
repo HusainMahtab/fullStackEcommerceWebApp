@@ -8,7 +8,7 @@ function Footer() {
      <footer className="bg-gray-500 text-white p-2 px-4 py-8">
        <div className="container mx-auto">
           
-        <div className="w-full h-full grid md:flex justify-between items-center gap-2">
+        <div className="w-full h-full grid justify-center place-content-center md:flex md:justify-between items-center gap-2">
             <div className="w-full grid justify-center place-content-center">
               <h2 className='text-xl font-bold font-serif'>Other Products</h2>
               <Link onClick={()=>window.open("https://school-website-theta-three.vercel.app/","_blank")} className='text-white font-semibold border-b-2 border-transparent hover:border-white transition-all duration-300 w-fit'>schoolwebSite</Link>

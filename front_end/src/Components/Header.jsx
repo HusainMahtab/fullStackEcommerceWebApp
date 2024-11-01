@@ -70,7 +70,15 @@ const user=useSelector(state=>state?.user?.user)
            >
            {
             user?.profilePic ? (
-              <img className="rounded-full w-8 h-8" src={user?.profilePic} alt={user?.name}/>
+              <div className='flex flex-col justify-center items-center'>
+               <img className="rounded-full w-8 h-8" src={user?.profilePic} alt={user?.name}/>
+               {
+                 user?.role==="ADMIN"&&(
+                  <h4 className='text-sm font-semibold text-gray-600'>ADMIN</h4>
+                 )
+               }
+              </div>
+             
             ):(<FaUserCircle className='hover:text-gray-600' />)
            }
           </div>
