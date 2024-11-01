@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useContext } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { IoIosStar } from "react-icons/io";
@@ -6,6 +6,7 @@ import { IoIosStarHalf } from "react-icons/io";
 import displayINRCurrency from "../helpers/displayCurrencyThemes"
 import ShowRecommendedProduct from '../Components/ShowRecommendedProduct';
 import addToCart from '../helpers/addToCart';
+import Context from '../context';
 import {useSelector} from "react-redux"
 
 function ProductDetails() {
@@ -31,7 +32,7 @@ function ProductDetails() {
   const [zoomImageCoordinate,setZoomImageCoordinate]=useState({x:0,y:0,})
   const [showZoomImage,setShowZoomImage]=useState(false)  
   const user=useSelector(state=>state?.user?.user)  
- 
+  const {countAddToCartItem}=useContext(Context)
   //console.log("product id ",params)
 
   const fetchedProductDetails=async()=>{
@@ -47,12 +48,17 @@ function ProductDetails() {
 }
 useEffect(()=>{
   fetchedProductDetails()
+  countAddToCartItem()
 },[params])
 useEffect(() => {
   if(data?.productImage.length) {
     setChangeImageURl(data.productImage[0])
   }
 },[data])
+
+useEffect(()=>{
+   countAddToCartItem()
+},[addToCart])
 
 const handleZoomImage = (e) => {
   setShowZoomImage(true)

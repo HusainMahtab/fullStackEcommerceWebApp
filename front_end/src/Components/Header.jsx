@@ -51,7 +51,7 @@ const user=useSelector(state=>state?.user?.user)
       <div className='container mx-auto flex items-center h-16 justify-between'>
         <div className='h-16 w-16'>
           <Link to={"/"}>
-            <img className='object-cover h-full w-full cursor-pointer' src={logo} alt="Logo" />
+            <img className='object-cover h-full w-full cursor-pointer animate-bounce' src={logo} alt="Logo" />
           </Link>
         </div>
         <div className="hidden md:flex items-center w-full justify-between max-w-sm border rounded-full focus-within:shadow-md pl-2">

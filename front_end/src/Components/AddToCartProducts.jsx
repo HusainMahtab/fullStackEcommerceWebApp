@@ -26,6 +26,7 @@ function AddToCartProducts() {
   }
   useEffect(()=>{
      addToCart()
+     countAddToCartItem()
   },[])
   console.log("addProducts",addedProducts)
 
