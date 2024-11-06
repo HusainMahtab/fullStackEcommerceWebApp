@@ -9,6 +9,7 @@ import addToCart from '../helpers/addToCart';
 import Context from '../context';
 import { useNavigate } from 'react-router-dom'; 
 import {useSelector} from "react-redux"
+import scrollTop from '../helpers/scrollTop';
 
 function ProductDetails() {
   const [data,setData]=useState({
@@ -74,10 +75,11 @@ const handleZoomImage = (e) => {
 const handleOutImage=()=>{
   setShowZoomImage(false)
 }
-const handleNavigate=(e)=>{
+const handleNavigate=(e,_id)=>{
   e?.preventDefault()
   e?.stopPropagation()
-  navigate("/buy_product")
+  scrollTop()
+  navigate("/buy_product/"+_id)
 }
 
 //console.log("data",data)
@@ -198,7 +200,7 @@ const handleNavigate=(e)=>{
                 <p className="line-through text-slate-400">{displayINRCurrency(data.price)}</p>
               </div>
               <div className='flex gap-2 mt-2'>
-                 <button className='border-2 border-gray-600 bg-gray-600 hover:bg-gray-700 text-white rounded-lg px-3 py-1 font-bold' onClick={(e)=>handleNavigate(e)}>Buy Now</button>
+                 <button className='border-2 border-gray-600 bg-gray-600 hover:bg-gray-700 text-white rounded-lg px-3 py-1 font-bold' onClick={(e)=>handleNavigate(e,data?._id)}>Buy Now</button>
                  <button className='border-2 border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white rounded-lg px-3 py-1 font-bold' onClick={(e)=>addToCart(e,data._id,user)}>Add To Cart</button>
               </div>
               <div>

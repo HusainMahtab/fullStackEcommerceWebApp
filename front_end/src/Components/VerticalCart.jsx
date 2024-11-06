@@ -61,7 +61,7 @@ function VerticalCart({loading,data=[]}) {
         
         </div>
       ) : (
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,300px))] justify-center gap-1 md:justify-between overflow-scroll overflow-y-hidden scrollbar-hide scroll-smooth transition-all">
+        <div onClick={()=>scrollTop()} className="grid grid-cols-[repeat(auto-fit,minmax(260px,300px))] justify-center gap-1 md:justify-between overflow-scroll overflow-y-hidden scrollbar-hide scroll-smooth transition-all">
           {
             data.map((ele,index)=>(
               <Link to={"/product/"+ele?._id} className="w-full min-w-[280px] md:min-w-[280px] max-w-[300px] md:max-w-[320px] bg-white shadow-lg rounded-lg mb-4 md:mb-6" key={index+1} onClick={()=>scrollTop()}>

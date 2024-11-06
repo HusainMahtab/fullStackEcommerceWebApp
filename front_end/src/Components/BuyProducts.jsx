@@ -111,7 +111,7 @@ function BuyProducts() {
       navigate("/success_order")
     } catch (error) {
       console.error("error while creating a order",error)
-      toast.error("Error, something is wrong!")
+      toast.error("Plese Enter inputs fields!")
     }
 
   }
@@ -187,7 +187,7 @@ function BuyProducts() {
            <div className='p-2 bg-slate-200 flex justify-center items-center'>
              <img src={ProductData?.productImage[0]} alt={ProductData?.productName} className='w-[350px] h-[150px] md:w-[200px] md:h-[200px] mix-blend-multiply' />
            </div>
-           <div className='grid '>
+           <div className='grid'>
               <p className='w-full text-center bg-slate-300 rounded-full'>{ProductData?.brandName}</p>
               <h1 className='text-lg font-bold'>{ProductData?.productName}</h1>
               <p>{ProductData?.category}</p>
@@ -207,10 +207,11 @@ function BuyProducts() {
               <p className='text-sm text-green-600 animate-ping font-bold w-full text-center'>OFF- {displayINRCurrency(ProductData?.price-ProductData?.sellingPrice)}</p>
            </div>
          </div>
+         <div className="">
          <form action="submit" className='grid gap-2 mb-4' onSubmit={handleSubmit}>
             <div className='grid'>
                <label htmlFor="customer">CustomerName:</label>
-               <input type="text" id="customer" name='customerName' value={orderData.customerName} placeholder='Enter your name' onChange={handleChange} className='p-2 text-lg font-semibold bg-slate-200' required />
+               <input type="text" id="customer" autoFocus name='customerName' value={orderData.customerName} placeholder='Enter your name' onChange={handleChange} className='p-2 text-lg font-semibold bg-slate-200' required />
             </div>
             <div className='grid'>
                <label htmlFor="address">Address:</label>
@@ -233,6 +234,7 @@ function BuyProducts() {
             <button className='w-full p-2 text-lg bg-purple-700 text-white font-bold rounded hover:bg-purple-600'>{displayINRCurrency((ProductData?.sellingPrice)*updateQuantity)} Pay</button>
          </form>
          <button className='w-full p-2 text-lg border-2 border-purple-700 text-purple-700 font-bold rounded hover:bg-purple-600 hover:text-white' onClick={handleCaseOnDeleverySubmit}>Case on Delevery</button>
+         </div>
         </div>
         )
        }

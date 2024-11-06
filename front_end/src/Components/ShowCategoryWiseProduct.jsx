@@ -86,7 +86,7 @@ function ShowCategoryWiseProduct({category,heading}) {
             
             </div>
           ) : (
-            <div className="flex items-center gap-2 md:p-4 md:gap-6 overflow-scroll overflow-y-hidden scrollbar-hide scroll-smooth transition-all" ref={scrollElement}>
+            <div onClick={()=>scrollTop()} className="flex items-center gap-2 md:p-4 md:gap-6 overflow-scroll overflow-y-hidden scrollbar-hide scroll-smooth transition-all" ref={scrollElement}>
              <button className="bg-white rounded-full hover:bg-slate-300 absolute left-0 text-2xl p-1 shadow-lg hidden md:block" onClick={scrollLeft}><FaAngleLeft/></button>
              <button className="bg-white rounded-full hover:bg-slate-300 absolute right-0 text-2xl p-1 shadow-lg hidden md:block" onClick={scrollRigth}><FaAngleRight/></button>    
               {
