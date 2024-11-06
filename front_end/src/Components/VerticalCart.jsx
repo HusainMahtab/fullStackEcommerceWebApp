@@ -6,7 +6,9 @@ import Context from '../context'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import addToCart from "../helpers/addToCart"
+import scrollTop from '../helpers/scrollTop'
 function VerticalCart({loading,data=[]}) { 
+  
     const loadingList=new Array(14).fill(null)
     const user=useSelector(state=>state?.user?.user)
     const {countAddToCartItem}=useContext(Context)
@@ -15,6 +17,13 @@ function VerticalCart({loading,data=[]}) {
         await addToCart(e,_id,user)
         await countAddToCartItem()
       }
+      const handleNavigate=(e,_id)=>{
+      e?.preventDefault();
+      e?.stopPropagation();
+      scrollTop()
+      console.log("_did",_id)
+      navigate("/buy_product/"+_id)
+    }
   return (
     <div className='container px-2 md:mx-8 mx-auto'>
     {
@@ -74,7 +83,7 @@ function VerticalCart({loading,data=[]}) {
                   
                   <div className="flex gap-4 py-4">
                      <button className='px-3 py-1 border-2 border-yellow-800 text-yellow-800 hover:bg-yellow-800 hover:text-white rounded-lg font-bold text-lg' onClick={(e)=>handleAddToCart(e,ele?._id,user)}>Add to Cart</button>
-                     <button className='px-3 py-1 border-2 border-yellow-800 bg-yellow-800 text-white hover:bg-yellow-700 rounded-lg font-bold text-lg'>Buy Now</button> 
+                     <button className='px-3 py-1 border-2 border-yellow-800 bg-yellow-800 text-white hover:bg-yellow-700 rounded-lg font-bold text-lg' onClick={(e)=>handleNavigate(e,ele?._id)}>Buy Now</button> 
                   </div>
                 
                 </div>

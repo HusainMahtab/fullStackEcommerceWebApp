@@ -9,6 +9,7 @@ import addToCart from '../helpers/addToCart';
 import { Link } from 'react-router-dom';
 import {useSelector} from "react-redux"
 import { useNavigate } from 'react-router-dom';
+import scrollTop from '../helpers/scrollTop';
 import Context from '../context';
 
 function VerticalProductCart({category,heading}) {
@@ -47,10 +48,12 @@ function VerticalProductCart({category,heading}) {
       await addToCart(e,_id,user)
       await countAddToCartItem()
     }
-    const handleNavigate=(e)=>{
+    const handleNavigate=(e,_id)=>{
       e?.preventDefault();
       e?.stopPropagation();
-      navigate("/buy_product")
+      scrollTop()
+      console.log("_did",_id)
+      navigate("/buy_product/"+_id)
     }
   return (
     <div className='container px-2 my-2 mx-auto relative'>
@@ -114,7 +117,7 @@ function VerticalProductCart({category,heading}) {
                       
                       <div className="flex gap-4 py-4">
                          <button className='px-3 py-1 border-2 border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white rounded-lg font-bold text-lg' onClick={(e)=>handleAddToCart(e,ele?._id,user)}>Add to Cart</button>
-                         <button className='px-3 py-1 border-2 border-gray-600 bg-gray-600 text-white hover:bg-gray-700 rounded-lg font-bold text-lg' onClick={(e)=>handleNavigate(e)}>Buy Now</button> 
+                         <button className='px-3 py-1 border-2 border-gray-600 bg-gray-600 text-white hover:bg-gray-700 rounded-lg font-bold text-lg' onClick={(e)=>handleNavigate(e,ele?._id)}>Buy Now</button> 
                       </div>
                     
                     </div>

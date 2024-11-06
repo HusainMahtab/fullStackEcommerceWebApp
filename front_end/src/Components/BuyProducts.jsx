@@ -97,6 +97,25 @@ function BuyProducts() {
     }
   }, [ProductData]);
 
+  const handleCaseOnDeleverySubmit=async(e)=>{
+     e.preventDefault()
+     const updatedOrderData={
+      ...orderData,
+      quantity:updateQuantity
+     }
+     //console.log("orderData",updatedOrderData)
+     try {
+      const orderResponse=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/orders/order`,updatedOrderData,{withCredentials:true})
+      toast.success("Order sucessful")
+      //console.log("orderResponse",orderResponse)
+      navigate("/success_order")
+    } catch (error) {
+      console.error("error while creating a order",error)
+      toast.error("Error, something is wrong!")
+    }
+
+  }
+
   const handleIncressQuantity=()=>{
     setUpdateQuantity((prev)=>prev+1)
     
@@ -106,7 +125,64 @@ function BuyProducts() {
   }
 
   return (
-    <div className='w-full grid justify-center place-content-center p-2 gap-4'>
+     <div>
+       {
+        loading ? ( 
+        <div className='w-[0px] md:w-full grid justify-center place-content-center p-2 gap-4'>
+         <div className='flex gap-2 p-4 '>
+           <div className='p-2 bg-slate-200 flex justify-center items-center animate-pulse'>
+             <img src={""} className='w-[350px] h-[150px] md:w-[200px] md:h-[200px] mix-blend-multiply' />
+           </div>
+           <div className='grid gap-2'>
+              <p className='text-center bg-slate-300 rounded-full animate-pulse'></p>
+              <h1 className='text-lg font-bold bg-slate-300 animate-pulse'></h1>
+              <p className='p-1 bg-slate-300 animate-pulse'></p>
+              <div className='flex text-xl gap-2 font-bold'>
+                <IoIosStar className='text-slate-300 animate-pulse'/>
+                <IoIosStar className='text-slate-300 animate-pulse'/>
+                <IoIosStar className='text-slate-300 animate-pulse'/>
+                <IoIosStar className='text-slate-300 animate-pulse'/>
+                <IoIosStarHalf className='text-slate-300 animate-pulse'/>
+              </div>
+              <p className='bg-slate-300 animate-pulse p-1'></p>
+              <p className=' bg-slate-300 animate-pulse p-1'></p>
+              <div className='flex gap-2'>
+                <p className='bg-slate-300 p-1 animate-pulse'></p>
+                <p className='bg-slate-300 p-1 animate-pulse'></p>
+              </div>
+              <p className='p-1 bg-slate-300 animate-pulse'></p>
+           </div>
+         </div>
+         <form action="submit" className='grid gap-2 mb-4'>
+            <div className='grid ga-2'>
+               <label className='p-1 bg-slate-300 animate-pulse'></label>
+               <input className='p-2 bg-slate-300 animate-pulse'/>
+            </div>
+            <div className='grid'>
+               <label className='p-1 bg-slate-300 animate-pulse'></label>
+               <textarea className='p-1 bg-slate-300 animate-pulse'></textarea>
+            </div>
+            <div className='grid'>
+               <label className='p-1 bg-slate-300 animate-pulse'></label>
+               <input className='p-1 bg-slate-300 animate-pulse'/>
+            </div>
+            <div className='flex gap-2 justify-center items-center'>
+               <label className='p-1 bg-slate-300 animate-pulse'></label>
+               <div className='p-1 bg-slate-300 animate-pulse'></div>
+                <p className='p-1 bg-slate-300 animate-pulse'></p>
+               <div className='p-1 bg-slate-300 animate-pulse'></div>
+            </div>
+            <div className='grid'>
+               <label className='p-1 bg-slate-300 animate-pulse'></label>
+               <p className='p-1 bg-slate-300 animate-pulse'></p>
+            </div>
+            <button className='p-1 bg-slate-300 animate-pulse'></button>
+            <button className='p-1 bg-slate-300 animate-pulse'></button>
+
+         </form>
+        </div>
+        ) : (
+        <div className='w-full grid justify-center place-content-center p-3 gap-4'>
          <div className='flex gap-2 p-4 '>
            <div className='p-2 bg-slate-200 flex justify-center items-center'>
              <img src={ProductData?.productImage[0]} alt={ProductData?.productName} className='w-[350px] h-[150px] md:w-[200px] md:h-[200px] mix-blend-multiply' />
@@ -155,10 +231,12 @@ function BuyProducts() {
                <p className='text-xl font-mono font-bold'>{displayINRCurrency((ProductData?.sellingPrice)*updateQuantity)}</p>
             </div>
             <button className='w-full p-2 text-lg bg-purple-700 text-white font-bold rounded hover:bg-purple-600'>{displayINRCurrency((ProductData?.sellingPrice)*updateQuantity)} Pay</button>
-            <button className='w-full p-2 text-lg border-2 border-purple-700 text-purple-700 font-bold rounded hover:bg-purple-600 hover:text-white'>Case on Delevery</button>
-
          </form>
-    </div>
+         <button className='w-full p-2 text-lg border-2 border-purple-700 text-purple-700 font-bold rounded hover:bg-purple-600 hover:text-white' onClick={handleCaseOnDeleverySubmit}>Case on Delevery</button>
+        </div>
+        )
+       }
+     </div>
   )
 }
 

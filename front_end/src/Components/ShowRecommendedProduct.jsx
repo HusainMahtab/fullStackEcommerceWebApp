@@ -38,10 +38,11 @@ function ShowRecommendedProduct({category,heading}) {
       await countAddToCartItem()
     }
 
-    const handleNavigate=(e)=>{
+    const handleNavigate=(e,_id)=>{
       e?.preventDefault();
       e?.stopPropagation();
-      navigate("/buy_product")
+      scrollTop()
+      navigate("/buy_product/"+_id)
     }
 
   return (
@@ -73,7 +74,7 @@ function ShowRecommendedProduct({category,heading}) {
                           <p className='bg-gray-400 w-20 h-4 rounded-full animate-pulse'></p>
                        </div>
                       <button className=' w-20 px-4 py-2 my-2 bg-gray-400 rounded-full animate-pulse'></button>
-                      <button className=' w-20 px-4 py-2 my-2 mx-2 bg-gray-400 rounded-full animate-pulse' onClick={(e)=>handleNavigate(e)}></button>
+                      <button className=' w-20 px-4 py-2 my-2 mx-2 bg-gray-400 rounded-full animate-pulse'></button>
                       
                     </div>
                   </div>
@@ -104,7 +105,7 @@ function ShowRecommendedProduct({category,heading}) {
                       
                       <div className="flex gap-4 py-4">
                          <button className='px-3 py-1 border-2 border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white rounded-lg font-bold text-lg' onClick={(e)=>handleAddToCart(e,ele?._id,user)}>Add to Cart</button>
-                         <button className='px-3 py-1 border-2 border-gray-600 bg-gray-600 text-white hover:bg-gray-700 rounded-lg font-bold text-lg' onClick={(e)=>handleNavigate(e)}>Buy Now</button> 
+                         <button className='px-3 py-1 border-2 border-gray-600 bg-gray-600 text-white hover:bg-gray-700 rounded-lg font-bold text-lg' onClick={(e)=>handleNavigate(e,ele?._id)}>Buy Now</button> 
                       </div>
                     
                     </div>

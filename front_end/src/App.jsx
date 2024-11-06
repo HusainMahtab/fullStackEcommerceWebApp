@@ -23,6 +23,7 @@ import ContactMe from './Components/ContactMe';
 import AllUserMessages from './Components/AllUserMessages';
 import BuyProducts from "./Components/BuyProducts"
 import ConfirmOrder from './Components/ConfirmOrder';
+import SuccessOrder from './Components/SuccessOrder';
 function App() {
   const dispatch = useDispatch();
   const [countAddtoCartProduct,setCountAddToCartProduct]=useState(0)
@@ -98,6 +99,7 @@ function App() {
               <Route path='/contact_me' element={<ContactMe/>}/>
               <Route path='/buy_product/:_id' element={<BuyProducts/>}/>
               <Route path='/confirm_order' element={<ConfirmOrder/>}/>
+              <Route path='/success_order' element={<SuccessOrder/>}/>
             </Routes>
           </main>
           <Footer />
