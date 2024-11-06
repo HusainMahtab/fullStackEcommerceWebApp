@@ -4,12 +4,13 @@ import displayINRCurrency from '../helpers/displayCurrencyThemes'
 import { useSelector } from 'react-redux'
 import Context from '../context'
 import { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import addToCart from "../helpers/addToCart"
 function VerticalCart({loading,data=[]}) { 
     const loadingList=new Array(14).fill(null)
     const user=useSelector(state=>state?.user?.user)
     const {countAddToCartItem}=useContext(Context)
-
+    const navigate=useNavigate()
     const handleAddToCart=async(e,_id,user)=>{
         await addToCart(e,_id,user)
         await countAddToCartItem()

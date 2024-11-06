@@ -1,5 +1,4 @@
 import React from 'react'
-
 function AboutMe() {
   return (
     <div className='w-full flex flex-col md:flex-row justify-center items-center p-8'>

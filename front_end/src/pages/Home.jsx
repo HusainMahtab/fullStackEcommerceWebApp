@@ -18,7 +18,7 @@ function Home() {
       <VerticalProductCart category={"camera"} heading={"Camera & Photography"}/>
       <VerticalProductCart category={"printers"} heading={"Latest's Printers"}/>
       <VerticalProductCart category={"refrigerator"} heading={"Latest's refrigerator"}/>
-      <VerticalProductCart category={"trimmers"} heading={"Latest's Trimmers"}/>\
+      <VerticalProductCart category={"trimmers"} heading={"Latest's Trimmers"}/>
       <VerticalProductCart category={"shirt"} heading={"Style & Fashion's"}/>
       <VerticalProductCart category={"t-shirt"} heading={"Style & Fashion's"}/>
       

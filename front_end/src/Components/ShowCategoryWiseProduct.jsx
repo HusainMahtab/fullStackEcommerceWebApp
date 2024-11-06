@@ -8,7 +8,8 @@ import { FaAngleRight } from "react-icons/fa6";
 import {Link} from "react-router-dom"
 import addToCart from '../helpers/addToCart';
 import Context from '../context'
-
+import scrollTop from '../helpers/scrollTop'
+import { useNavigate } from 'react-router-dom'
 
 function ShowCategoryWiseProduct({category,heading}) {
     const [product,setProduct]=useState([])
@@ -17,6 +18,7 @@ function ShowCategoryWiseProduct({category,heading}) {
     const user=useSelector(state=>state?.user?.user)
     const loadingList=new Array(14).fill(null)
     const {countAddToCartItem}=useContext(Context)
+    const navigate=useNavigate()
     const fetchData = async () => {
       try {
         const categoryProduct = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/products/categoryProduct`, {
@@ -44,6 +46,12 @@ function ShowCategoryWiseProduct({category,heading}) {
     const handleAddToCart=async(e,_id,user)=>{
       await addToCart(e,_id,user)
       await countAddToCartItem()
+    }
+    const handleNavigate=(e,_id)=>{
+      e?.preventDefault();
+      e?.stopPropagation();
+      scrollTop()
+      navigate("/buy_product/"+_id)
     }
   return (
     <div className='container my-2 mx-auto relative'>
@@ -101,7 +109,7 @@ function ShowCategoryWiseProduct({category,heading}) {
                        </div>
                        <div className="grid gap-2 py-2">
                          <button className='border-2 border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white rounded-lg px-3 py-1 font-bold w-[116px]' onClick={(e)=>handleAddToCart(e,ele?._id,user)}>Add to Cart</button>
-                         <button className='border-2 border-gray-600 bg-gray-600 text-white hover:bg-gray-700 rounded-lg px-3 py-1 font-bold w-[115px]'>Buy Now</button>
+                         <button className='border-2 border-gray-600 bg-gray-600 text-white hover:bg-gray-700 rounded-lg px-3 py-1 font-bold w-[115px]' onClick={(e)=>handleNavigate(e,ele?._id)}>Buy Now</button>
                        </div>
                     </div>
                   </Link>

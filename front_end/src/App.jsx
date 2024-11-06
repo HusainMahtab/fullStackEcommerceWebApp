@@ -21,6 +21,8 @@ import SearchProduct from './pages/SearchProduct';
 import AboutMe from './Components/AboutMe';
 import ContactMe from './Components/ContactMe';
 import AllUserMessages from './Components/AllUserMessages';
+import BuyProducts from "./Components/BuyProducts"
+import ConfirmOrder from './Components/ConfirmOrder';
 function App() {
   const dispatch = useDispatch();
   const [countAddtoCartProduct,setCountAddToCartProduct]=useState(0)
@@ -94,6 +96,8 @@ function App() {
               <Route path='/search-products' element={<SearchProduct/>}/>
               <Route path='/about_me' element={<AboutMe/>}/>
               <Route path='/contact_me' element={<ContactMe/>}/>
+              <Route path='/buy_product/:_id' element={<BuyProducts/>}/>
+              <Route path='/confirm_order' element={<ConfirmOrder/>}/>
             </Routes>
           </main>
           <Footer />

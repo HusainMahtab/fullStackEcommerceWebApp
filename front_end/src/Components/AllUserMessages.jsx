@@ -44,8 +44,7 @@ function AllUserMessages() {
         console.error("error while deleting user message")
         toast.error("not deleted something is wrong")
       }
-   }
-   
+   }   
   return (
     <div>
      <h1 className='w-full text-center font-bold p-2 text-xl'>All Messagess <span>{`(${countMessagess})`}</span></h1>
@@ -62,11 +61,12 @@ function AllUserMessages() {
          </thead>
         
            {
-            loading ?  (
+            loading ? (
               <div className='w-full mt-4 flex justify-center'>
                 <div className="w-fit p-2 bg-gray-600 text-white text-center">loading,wait...</div>
               </div>
-            ) : (
+              
+            ) :(
               <tbody>
               {
                 allMessage.map((ele,index)=>{
@@ -91,10 +91,12 @@ function AllUserMessages() {
                 </tr>
               )
             })
+            
           }
               </tbody>
             )
            } 
+          
 
        </table>
       </div>

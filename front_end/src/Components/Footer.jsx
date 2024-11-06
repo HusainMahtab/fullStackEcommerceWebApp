@@ -2,6 +2,7 @@ import React from 'react'
 import { FaInstagramSquare } from "react-icons/fa";
 import { FaSquareGithub } from "react-icons/fa6";
 import { FaFacebookSquare } from "react-icons/fa";
+import scrollTop from '../helpers/scrollTop'
 import { Link } from 'react-router-dom';
 function Footer() {
   return (
@@ -17,10 +18,10 @@ function Footer() {
             </div>
              <div className="w-full grid gap-1 justify-center place-content-center">
                 <h2 className='text-xl font-bold text-white font-serif'>Developer</h2>
-                <Link to={"/about_me"} className='text-md w-fit font-semibold text-white border-b-2 border-transparent hover:border-white transition-all duration-300'>
+                <Link to={"/about_me"} className='text-md w-fit font-semibold text-white border-b-2 border-transparent hover:border-white transition-all duration-300' onClick={()=>scrollTop()}>
                    About-Me
                 </Link>
-                <Link to={"/contact_me"} className='text-md w-fit font-semibold text-white border-b-2 border-transparent hover:border-white transition-all duration-300'>
+                <Link to={"/contact_me"} className='text-md w-fit font-semibold text-white border-b-2 border-transparent hover:border-white transition-all duration-300' onClick={()=>scrollTop()}>
                   Contact-Me
                 </Link>
                 <Link onClick={()=>window.open("https://my-portfolio-v3ie.onrender.com/","_blank",)} className='text-md w-fit font-semibold text-white border-b-2 border-transparent hover:border-white transition-all duration-300'>

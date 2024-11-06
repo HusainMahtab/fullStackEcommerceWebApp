@@ -52,3 +52,7 @@ app.use("/api/v1/carts", cartRouter);
 // import user message router
 import messageRouter from "./routes/user.message.routes.js"
 app.use("/api/v1/message",messageRouter)
+
+// import user orders router
+import orderRouter from "./routes/order.routes.js"
+app.use("/api/v1/orders",orderRouter)

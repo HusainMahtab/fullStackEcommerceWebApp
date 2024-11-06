@@ -87,7 +87,7 @@ function CategoryPage() {
   return (
     <div className='container mx-auto p-4'>
         {/* dextop version */}
-        <div className="hidden md:grid grid-cols-[200px,1fr]">
+        <div className="md:grid grid-cols-[200px,1fr]">
             {/* left side */}
             <div className="bg-gray-500 p-1 min-h-[calc(100vh-170px)] overflow-y-scroll scrollbar-hide">
                {/* short by */}

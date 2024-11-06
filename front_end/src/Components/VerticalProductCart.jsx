@@ -8,6 +8,7 @@ import { FaAngleRight } from "react-icons/fa6";
 import addToCart from '../helpers/addToCart';
 import { Link } from 'react-router-dom';
 import {useSelector} from "react-redux"
+import { useNavigate } from 'react-router-dom';
 import Context from '../context';
 
 function VerticalProductCart({category,heading}) {
@@ -18,7 +19,7 @@ function VerticalProductCart({category,heading}) {
     const user=useSelector(state=>state?.user?.user)
     const loadingList=new Array(14).fill(null)
     const {countAddToCartItem}=useContext(Context)
-    
+    const navigate=useNavigate()
     const fetchData = async () => {
       try {
         const categoryProduct = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/products/categoryProduct`, {
@@ -45,7 +46,11 @@ function VerticalProductCart({category,heading}) {
     const handleAddToCart=async(e,_id,user)=>{
       await addToCart(e,_id,user)
       await countAddToCartItem()
-      
+    }
+    const handleNavigate=(e)=>{
+      e?.preventDefault();
+      e?.stopPropagation();
+      navigate("/buy_product")
     }
   return (
     <div className='container px-2 my-2 mx-auto relative'>
@@ -109,7 +114,7 @@ function VerticalProductCart({category,heading}) {
                       
                       <div className="flex gap-4 py-4">
                          <button className='px-3 py-1 border-2 border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white rounded-lg font-bold text-lg' onClick={(e)=>handleAddToCart(e,ele?._id,user)}>Add to Cart</button>
-                         <button className='px-3 py-1 border-2 border-gray-600 bg-gray-600 text-white hover:bg-gray-700 rounded-lg font-bold text-lg'>Buy Now</button> 
+                         <button className='px-3 py-1 border-2 border-gray-600 bg-gray-600 text-white hover:bg-gray-700 rounded-lg font-bold text-lg' onClick={(e)=>handleNavigate(e)}>Buy Now</button> 
                       </div>
                     
                     </div>
