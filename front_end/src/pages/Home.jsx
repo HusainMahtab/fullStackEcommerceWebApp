@@ -3,9 +3,20 @@ import CategoryList from '../Components/CategoryList'
 import BannerProduct from "../Components/BannerProduct"
 import ShowCategoryWiseProduct from '../Components/ShowCategoryWiseProduct'
 import VerticalProductCart from '../Components/VerticalProductCart'
+import { CiSearch } from "react-icons/ci";
+import { useNavigate } from 'react-router-dom'
 function Home() {
+  const navigate=useNavigate()
   return (
     <div>
+      <div className='flex justify-center items-center p-2 md:hidden'>
+         <div className='flex'>
+            <button onClick={()=>navigate("/search")} className='w-[200px] p-2 rounded-l text-lg font-semibold border border-gray-600 text-gray-600 hover:text-white hover:bg-gray-600 '>Search Product</button>
+           <div className='w-[50px] rounded-r-xl flex justify-center items-center text-white bg-gray-600'>
+              <CiSearch className='text-2xl font-bold text-white'/>
+           </div>
+         </div>
+      </div>
       <CategoryList/>
       <BannerProduct/>
       <ShowCategoryWiseProduct category={"airpodes"} heading={"Top's Airpodes"}/>

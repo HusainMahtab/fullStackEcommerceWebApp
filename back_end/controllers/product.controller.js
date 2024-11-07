@@ -203,6 +203,7 @@ const getProductDetails=AsyncHandler(async(req,res)=>{
 // seach products
 const searchProduct=AsyncHandler(async(req,res)=>{
     const query=req.query.q
+    console.log("query",query)
     if(!query){
         throw new ApiError(500,"query not found!")
     }
