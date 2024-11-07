@@ -31,7 +31,8 @@ function BuyProducts() {
     customerName:"",
     customerAddress:"",
     phoneNumber:"",
-    quantity:1
+    quantity:1,
+    paymentMethods:""
   })
   const [updateQuantity,setUpdateQuantity]=useState(1)
   const [loading,setLoading]=useState(true)
@@ -69,7 +70,8 @@ function BuyProducts() {
      e.preventDefault()
      const updatedOrderData={
       ...orderData,
-      quantity:updateQuantity
+      quantity:updateQuantity,
+      paymentMethods:"Online payment completed"
      }
      //console.log("orderData",updatedOrderData)
      try {
@@ -101,7 +103,8 @@ function BuyProducts() {
      e.preventDefault()
      const updatedOrderData={
       ...orderData,
-      quantity:updateQuantity
+      quantity:updateQuantity,
+      paymentMethods:"Case on delevery"
      }
      //console.log("orderData",updatedOrderData)
      try {

@@ -9,7 +9,9 @@ const createOrder=AsyncHandler(async(req,res)=>{
     product,
     customerName,
     customerAddress,
-    phoneNumber
+    quantity,
+    phoneNumber,
+    paymentMethods,
   }=req.body
   console.log("orderdata",product,customerName,customerAddress,phoneNumber)
   if(!product){
@@ -24,12 +26,17 @@ const createOrder=AsyncHandler(async(req,res)=>{
   if(!phoneNumber){
     throw new ApiError(404,"phoneNumber is required!")
   }
+  if(!paymentMethods){
+    throw new ApiError(404,"paymentMethods is required!")
+  }
 
   const order=await Order.create({
     product,
     customerName,
     customerAddress,
-    phoneNumber
+    phoneNumber,
+    quantity,
+    paymentMethods
   })
 
   if(!order){

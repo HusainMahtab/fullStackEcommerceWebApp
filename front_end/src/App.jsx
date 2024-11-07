@@ -24,6 +24,7 @@ import AllUserMessages from './Components/AllUserMessages';
 import BuyProducts from "./Components/BuyProducts"
 import ConfirmOrder from './Components/ConfirmOrder';
 import SuccessOrder from './Components/SuccessOrder';
+import AllOrders from './pages/AllOrders';
 function App() {
   const dispatch = useDispatch();
   const [countAddtoCartProduct,setCountAddToCartProduct]=useState(0)
@@ -90,6 +91,7 @@ function App() {
                 <Route path="all_users" element={<AllUsers />} />
                 <Route path="all_product" element={<AllProducts />} />
                 <Route path='all_user_messages' element={<AllUserMessages/>}/>
+                <Route path="all_user_orders" element={<AllOrders/>}/>
               </Route>
               <Route path='/product_category' element={<CategoryPage/>}/>
               <Route path='/product/:_id' element={<ProductDetails/>}/>

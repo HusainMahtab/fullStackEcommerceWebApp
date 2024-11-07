@@ -41,6 +41,8 @@ function AdminPanel() {
                 <Link to="all_users" className='py-1 hover:bg-slate-100 px-2 rounded-md font-serif'>All Users</Link>
                 <Link to="all_product" className='py-1 hover:bg-slate-100 px-2 rounded-md font-serif' >All Product</Link>
                 <Link to="all_user_messages" className='py-1 hover:bg-slate-100 px-2 rounded-md font-serif' >All Users Messages</Link>
+                <Link to="all_user_orders" className='py-1 hover:bg-slate-100 px-2 rounded-md font-serif' >Orders</Link>
+
              </nav>
           </div>
         </aside>

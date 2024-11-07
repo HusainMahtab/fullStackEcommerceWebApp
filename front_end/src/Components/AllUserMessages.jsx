@@ -64,6 +64,13 @@ function AllUserMessages() {
             loading ? (
               <div className='w-full mt-4 flex justify-center'>
                 <div className="w-fit p-2 bg-gray-600 text-white text-center">loading,wait...</div>
+                {
+                  allMessage.length===0&& !loading&&(
+                    <div className='w-full h-32 flex justify-center items-center shadow-md '>
+                      <p className='text-xl font-bold text-gray-600'>No Message Availble</p>
+                    </div>
+                  )
+                }
               </div>
               
             ) :(

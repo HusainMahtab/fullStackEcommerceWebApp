@@ -35,6 +35,10 @@ const orderSchema=new mongoose.Schema({
          required:true,   
          default:1
      }, 
+     paymentMethods:{
+        type:String,
+        required:true
+     }
 },{
     timestamps:true
 })
