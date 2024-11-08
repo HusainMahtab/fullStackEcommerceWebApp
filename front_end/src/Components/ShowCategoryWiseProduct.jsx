@@ -55,7 +55,7 @@ function ShowCategoryWiseProduct({category,heading}) {
     }
   return (
     <div className='container my-2 mx-auto relative'>
-        <h2 className="text-2xl font-semibold py-3">{heading}</h2>
+        <h2 className="text-2xl p-3 font-semibold py-3">{heading}</h2>
         {
           loading ? (
             <div className="flex items-center gap-2 md:gap-6 overflow-scroll overflow-y-hidden scrollbar-hide scroll-smooth transition-all" ref={scrollElement}>    
@@ -86,12 +86,12 @@ function ShowCategoryWiseProduct({category,heading}) {
             
             </div>
           ) : (
-            <div onClick={()=>scrollTop()} className="flex items-center gap-2 md:p-4 md:gap-6 overflow-scroll overflow-y-hidden scrollbar-hide scroll-smooth transition-all" ref={scrollElement}>
+            <div className="flex items-center md:p-4 md:gap-6 overflow-scroll overflow-y-hidden scrollbar-hide scroll-smooth transition-all" ref={scrollElement}>
              <button className="bg-white rounded-full hover:bg-slate-300 absolute left-0 text-2xl p-1 shadow-lg hidden md:block" onClick={scrollLeft}><FaAngleLeft/></button>
              <button className="bg-white rounded-full hover:bg-slate-300 absolute right-0 text-2xl p-1 shadow-lg hidden md:block" onClick={scrollRigth}><FaAngleRight/></button>    
               {
                 product.map((ele,index)=>(
-                  <Link to={"product/"+ele?._id} className="w-full min-w-[290px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] bg-white shadow-lg h-48 rounded-lg flex mb-4 py-2 md:mx-1 mx-2" key={index+1}>
+                  <Link to={"product/"+ele?._id} onClick={()=>scrollTop()} className="w-full min-w-[300px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] bg-white shadow-lg h-48 rounded-lg flex  mb-4 py-2 md:mx-1 mx-2" key={index+1}>
                     <div className=" bg-slate-100 h-full mx-4 p-6 rounded-lg min-w-[120px] md:min-w-[145px]">
                          <img className="object-scale-down h-full w-full hover:scale-125 transition-all duration-500 mix-blend-multiply" src={ele.productImage[0]}/>
                     </div>

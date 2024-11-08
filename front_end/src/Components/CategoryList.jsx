@@ -37,7 +37,7 @@ function CategoryList() {
              </div>
              
             ) : (
-             <div className='flex items-center gap-4 justify-between pt-2 overflow-scroll scrollbar-hide'>
+             <div className='flex items-center gap-4 justify-between pt-24 overflow-scroll scrollbar-hide'>
                   {
                     categoryProduct.map((productCategory,index)=>(
                         <Link  to={"/product_category?category="+productCategory?.category} key={index+1}>

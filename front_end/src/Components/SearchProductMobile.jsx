@@ -35,7 +35,7 @@ function SearchProductMobile() {
                     type="text"
                     value={inputValue}
                     onChange={handleInputChange}
-                    placeholder="Search product here..."
+                    placeholder="Enter name,category,brand"
                     className='p-2 font-bold text-lg outline-none border-b-2 border-b-gray-600'
                     autoFocus
                 />
