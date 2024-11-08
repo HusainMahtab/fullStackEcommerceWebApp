@@ -9,7 +9,7 @@ function Home() {
   const navigate=useNavigate()
   return (
     <div className=''>
-      <div className='flex justify-center items-center w-full h-[85px] bg-white fixed z-20 p-2 md:hidden'>
+      <div className='flex justify-center items-center w-full border-t-2 border-t-gray-600 h-[85px] bg-white fixed z-10 p-2 md:hidden'>
          <div className='flex'>
             <button onClick={()=>navigate("/search")} className='w-[200px] p-2 rounded-l text-lg font-semibold border border-gray-600 text-gray-600 hover:text-white hover:bg-gray-600 '>Search Product</button>
            <div className='w-[50px] rounded-r-xl flex justify-center items-center text-white bg-gray-600'>

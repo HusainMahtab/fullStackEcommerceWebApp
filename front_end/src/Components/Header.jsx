@@ -47,7 +47,7 @@ const user=useSelector(state=>state?.user?.user)
   }
   
   return (
-    <header className="bg-white black-white shadow-lg px-2 border-b-2 border-b-gray-600 fixed top-0 left-0 right-0 z-10">
+    <header className="bg-white black-white shadow-lg px-2 fixed top-0 left-0 right-0 z-10">
       <div className='container mx-auto flex items-center h-16 justify-between'>
         <div className='h-16 w-16'>
           <Link to={"/"}>
