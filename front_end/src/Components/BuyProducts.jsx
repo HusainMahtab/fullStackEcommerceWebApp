@@ -202,7 +202,6 @@ function BuyProducts() {
                 <IoIosStarHalf/>
               </div>
               <p>Total-Review:{ProductData?.numOfReviews}</p>
-              <p>Review:{ProductData?.reviews[0]}</p>
               <div className='flex gap-2'>
                 <p className='text-lg'>{displayINRCurrency(ProductData?.sellingPrice)}</p>
                 <p className='text-slate-500 line-through'>{displayINRCurrency(ProductData?.price)}</p>

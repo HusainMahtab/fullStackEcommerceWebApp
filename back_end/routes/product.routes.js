@@ -8,7 +8,8 @@ import {
     getCategoryWiseProduct,
     getProductDetails,
     searchProduct,
-    filterProduct
+    filterProduct,
+    createProductReviews
 } from "../controllers/product.controller.js"
 import {authorizedUser,authorized_Role} from "../middlewares/verifyJWT.js"
 
@@ -40,6 +41,9 @@ router.route("/search-products").get(searchProduct)
 
 // filter product with category
 router.route("/filterProduct").get(filterProduct)
+
+// create prduct reviews
+router.route("/create_review/:_id").post(authorizedUser,createProductReviews)
 
 
 export default router

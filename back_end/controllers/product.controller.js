@@ -251,6 +251,57 @@ const filterProduct=AsyncHandler(async(req,res)=>{
     .json(new ApiResponse(200,product,"products found successfully"))
 })
 
+// create product reviews
+const createProductReviews = AsyncHandler(async (req, res) => {
+  const user = req.user._id;
+  if (!user) {
+    throw new ApiError(404, "User not found!");
+  }
+  const productId = req.params._id;
+  if (!productId) {
+    throw new ApiError(404, "Product ID not found!");
+  }
+  const { rating, comment } = req.body;
+  if (!rating) {
+    throw new ApiError(400, "Rating is required!");
+  }
+  if (!comment) {
+    throw new ApiError(400, "Comment is required!");
+  }
+  const product = await Product.findById(productId);
+  if (!product) {
+    throw new ApiError(404, "Product not found!");
+  }
+  // Check if the user has already reviewed this product
+  const alreadyReviewed = product.reviews.find(
+    (review) => review.user.toString() === user.toString()
+  );
+  if (alreadyReviewed) {
+    throw new ApiError(400, "You have already reviewed this product!");
+  }
+  // Add the review
+  const review = {
+    user,
+    userName: req.user.userName,
+    rating: Number(rating),
+    comment,
+  };
+  product.reviews.push(review);
+  // Update ratings and number of reviews
+  product.numOfReviews = product.reviews.length;
+  product.ratings =
+    product.reviews.reduce((acc, review) => acc + review.rating, 0) /
+    product.reviews.length;
+  // Save the product
+  await product.save();
+  res.status(201).json({
+    success: true,
+    message: "Review added successfully!",
+    product,
+  });
+});
+
+
 export {
     createProduct,
     updateProduct,
@@ -260,6 +311,7 @@ export {
     getCategoryWiseProduct,
     getProductDetails,
     searchProduct,
-    filterProduct
+    filterProduct,
+    createProductReviews
 }
 

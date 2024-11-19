@@ -10,6 +10,10 @@ import Context from '../context';
 import { useNavigate } from 'react-router-dom'; 
 import {useSelector} from "react-redux"
 import scrollTop from '../helpers/scrollTop';
+import { FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
+import { FaRegComment } from "react-icons/fa6";
+import { IoMdSend } from "react-icons/io";
 
 function ProductDetails() {
   const [data,setData]=useState({
@@ -36,6 +40,9 @@ function ProductDetails() {
   const user=useSelector(state=>state?.user?.user) 
   const navigate=useNavigate()
   const {countAddToCartItem}=useContext(Context)
+  const [showMore,setShowMore]=useState(false)
+  const descriptionToggleLength=100
+  const [showCommentInput,setShowCommentInput]=useState(false)
   //console.log("product id ",params)
 
   const fetchedProductDetails=async()=>{
@@ -82,11 +89,19 @@ const handleNavigate=(e,_id)=>{
   navigate("/buy_product/"+_id)
 }
 
+const handleShowMore=()=>{
+  setShowMore(!showMore)
+}
+
+const handleShowCommentInput=()=>{
+  setShowCommentInput(true)
+}
+
 //console.log("data",data)
   return (
     <>
     <div className='container mx-auto p-4'>
-       <div className='h-[410px] flex flex-col md:flex-row gap-4'>
+       <div className='h-auto flex flex-col md:flex-row gap-4'>
            {/* display product image */}
            <div className='h-100 flex flex-col lg:flex-row-reverse gap-4'>
               <div className='w-[300px] h-[300px] lg:w-96 lg:h-96 relative flex justify-center items-center'>
@@ -193,8 +208,7 @@ const handleNavigate=(e,_id)=>{
                   <IoIosStarHalf/>
                  </div>
               </div>
-              <p>Total-Review:{data?.numOfReviews}</p>
-              <p>Reviews:{data?.reviews}</p>
+              {/* <p>Total-Review:{data?.numOfReviews}</p> */}
               <div className='flex gap-3 text-lg font-semibold'>
                 <p className='text-gray-700'>{displayINRCurrency(data.sellingPrice)}</p>
                 <p className="line-through text-slate-400">{displayINRCurrency(data.price)}</p>
@@ -204,17 +218,45 @@ const handleNavigate=(e,_id)=>{
                  <button className='border-2 border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white rounded-lg px-3 py-1 font-bold' onClick={(e)=>addToCart(e,data._id,user)}>Add To Cart</button>
               </div>
               <div>
-                <p className='text-slate-600 font-medium my-1'>Descriptions :</p>
-                <p>{data?.description}</p>
+                <p className='text-slate-600 font-medium my-1 '>Descriptions :</p>
+                <p className={showMore ? "" : "line-clamp-1"}>{data?.description}</p>
+                {
+                  data.description.length > descriptionToggleLength&&(
+                   <span onClick={handleShowMore} className='text-blue-600 hover:underline cursor-pointer'>{showMore ? "Hide" : "show-more"}</span>
+                  )
+                }
+              </div>
+              <div className="">
+                 <div className='flex gap-4'>
+                  <div className='flex justify-center items-center gap-1 cursor-pointer'>
+                     <FaRegHeart className='text-lg'/>
+                     <p>Like</p>
+                  </div>
+                  <div onClick={handleShowCommentInput} className='flex justify-center items-center gap-1 cursor-pointer'>
+                    <FaRegComment className='text-lg'/>
+                    <p>Comment</p>
+                    {
+                      showCommentInput&&(
+                        <div className='flex justify-center items-center'>
+                         <input type="text" placeholder='Write a comment...' autoFocus className='p-[3px] outline-none  text-lg border border-blue-600'/>
+                         <div className='p-2 flex justify-center items-center bg-blue-600 text-white text-xl font-bold hover:bg-blue-500'>
+                          <IoMdSend/>
+                         </div>
+                        </div>
+                      )
+
+                    }
+                  </div>
+                 </div>
               </div>
              </div>
               )
             }
        </div>
-      <div className="mt-96 md:mt-2">
+      <div className="pt-4">
        {
         data?.category &&(
-           <ShowRecommendedProduct category={data?.category} heading={"Recommonded Product here..."}/>
+           <ShowRecommendedProduct category={data?.category} heading={"Similar products"}/>
         )
         }
       </div>

@@ -112,15 +112,23 @@ const user=useSelector(state=>state?.user?.user)
               )
             }
          
-          <div>
+          <div className='flex justify-center items-center gap-2'>
            {
             user?._id ? (<button onClick={handleLogout} className='px-3 bg-red-700 py-1 rounded-full text-white text-xs hover:bg-red-600'>LogOut</button>)
-            :(<Link to={"/login"} className='px-3 bg-gray-500 py-1 rounded-full text-white text-xs hover:bg-gray-600'> Login</Link>)
+            :(<Link to={"/login"} className='p-2 text-white font-bold bg-gray-600 rounded hover:bg-gray-500'> Login</Link>)
                
            }
+            <div>
+               {
+                !user?._id&&(
+                  <Link to={"/sign_up"} className='border font-bold text-lg border-gray-600 text-gray-600 hover:text-white hover:bg-gray-600 p-2 rounded'>SignUp</Link>
+                )
+               }
+            </div>
              <Toaster/>         
                 
           </div>
+          
         </div>
       </div>
     </header>
