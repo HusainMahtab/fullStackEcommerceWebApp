@@ -43,7 +43,7 @@ const productSchema=new mongoose.Schema({
         type:String,
         default:0
     },
-    reviews:[
+    productComments:[
         {
             user:{
                 type:mongoose.Schema.Types.ObjectId,
@@ -54,17 +54,47 @@ const productSchema=new mongoose.Schema({
                 type:String,
                 required:true,
             },
-            rating:{
-                type:Number,
-                required:true
-            },
             comment:{
                 type:String,
                 required:true
             }
-
         }
+    ],
+    productRating:[
+        {
+            user:{
+                type:mongoose.Schema.Types.ObjectId,
+                ref:"User",
+                required:true
+            },
+           userName:{
+            type:String,
+            required:true
+           },
+           rating:{
+            type:Number,
+            required:true,
+           }
+        }
+    ],
+    productLike:[
+       {
+           user:{
+              type:mongoose.Schema.Types.ObjectId,
+              ref:"User",
+              required:true
+           },
+           userName:{
+              type:String,
+              required:true
+           },
+           like:{
+             type:Boolean,
+             default:false
+           }
+       }
     ]
+
 
     
 },{timestamps:true})

@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom'
 function ShowCategoryWiseProduct({category,heading}) {
     const [product,setProduct]=useState([])
     const [loading,setLoading]=useState(true)
+    const [loader,setLoader]=useState(false)
     const scrollElement=useRef()
     const user=useSelector(state=>state?.user?.user)
     const loadingList=new Array(14).fill(null)
@@ -43,10 +44,18 @@ function ShowCategoryWiseProduct({category,heading}) {
       scrollElement.current.scrollLeft-=300
     }
 
-    const handleAddToCart=async(e,_id,user)=>{
-      await addToCart(e,_id,user)
-      await countAddToCartItem()
-    }
+    const handleAddToCart = async (e, _id, user) => {
+      setLoader((prev) => ({ ...prev, [_id]: true })); // Set loader for the specific product
+      try {
+        await addToCart(e, _id, user);
+        await countAddToCartItem();
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoader((prev) => ({ ...prev, [_id]: false })); // Reset loader for the specific product
+      }
+    };
+
     const handleNavigate=(e,_id)=>{
       e?.preventDefault();
       e?.stopPropagation();
@@ -108,7 +117,18 @@ function ShowCategoryWiseProduct({category,heading}) {
                           <p className='text-slate-500 md:text-sm line-through'>{displayINRCurrency(ele?.price)}</p>
                        </div>
                        <div className="grid gap-2 py-2">
-                         <button className='border-2 border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white rounded-lg px-3 py-1 font-bold w-[116px]' onClick={(e)=>handleAddToCart(e,ele?._id,user)}>Add to Cart</button>
+                         {loader[ele?._id] ? (
+                           <div className=" border-2 bg-gray-600 rounded-lg px-3 py-2 font-bold w-[116px] flex justify-center items-center">
+                             <div className="p-2 border-b-2 border-b-white rounded-full animate-spin"></div>
+                           </div>
+                           ) : (
+                              <button
+                              className="border-2 border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white rounded-lg px-3 py-1 font-bold w-[116px]"
+                              onClick={(e) => handleAddToCart(e, ele?._id, user)}
+                            >
+                           Add to Cart
+                          </button>
+                         )}
                          <button className='border-2 border-gray-600 bg-gray-600 text-white hover:bg-gray-700 rounded-lg px-3 py-1 font-bold w-[115px]' onClick={(e)=>handleNavigate(e,ele?._id)}>Buy Now</button>
                        </div>
                     </div>

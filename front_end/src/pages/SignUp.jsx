@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { Link,useNavigate } from 'react-router-dom'
 import userprofile from "../assets/user profile.png"
@@ -13,7 +13,7 @@ import axios from "axios"
 function SignUp() {
     const [showPassword,setshowPasword]=useState(false)
     const [showComfirmPassword,setShowConfirmPassword]=useState(false)
-
+    const [loader,setLoader]=useState(false)
     const navigate=useNavigate()
 
     const initialData={
@@ -40,9 +40,9 @@ function SignUp() {
 
     const handleSubmit=async(e)=>{
       e.preventDefault()
+      setLoader(true)
       if(formData.password===formData.confirmPassword){
          //console.log(formData.userName,formData.email,formData.profilePic,formData.password)
-         
       try {
          const signup_api=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/users/signup`,formData,{withCredentials:true})
          //console.log(signup_api.data)
@@ -50,24 +50,20 @@ function SignUp() {
          setTimeout(()=>{
             navigate("/login")
          },[500])
-
          setformData(initialData)
-       
-        
+         setLoader(false)
       } catch (error) {
-        
         console.log("error whiling signup user",error) 
         toast.error(`user not created ! something is wrong`)
-        
+        setLoader(false)
       } 
       }else{
          toast.error("please check password and confirm password")
+         setLoader(false)
       }
 
-      
-      
     }
-
+    
    const handleUploadPic=async(e)=>{
       const file=e.target.files[0]
 
@@ -175,17 +171,18 @@ function SignUp() {
                     {/* <Link to={"/forgot_password"} className=' text-blue-600 block w-fit ml-auto hover:underline hover:text-blue-800'>Forgot-password ? </Link> */}
                  </div>
                  <div>
-                     <button className='bg-gray-600 text-white px-6 py-2 w-full max-w-[150px] rounded-full hover:scale-110 transition-all mx-auto block mt-6 hover:bg-gray-700 '>Register</button>
-                     <Toaster toastOptions={{
-                       className: 'shadow-lg',
-                       style: {
-                          border: '1px solid #713200',
-                          padding: '10px',
-                          color: 'gray',
-                          backgroundColor:"white"
-                        },
-                     }}
-                    />
+                   {
+                     loader ? (
+                        <div className="w-full flex justify-center items-center p-2">
+                          <div className="w-full max-w-[150px] p-3 mt-2 flex justify-center items-center rounded-full bg-gray-600">
+                            <div className="p-2 border-b-[2px] border-b-slate-300 rounded-full animate-spin"></div>
+                          </div>
+                        </div>
+                     ) : (
+                        <button className='bg-gray-600 text-white px-6 py-2 w-full max-w-[180px] rounded-full hover:scale-110 transition-all mx-auto block mt-6 hover:bg-gray-700 '>Register</button>  
+                     )
+                   }
+                    
                  </div>
               </form>
               <p className='py-6 text-gray-700 mx-2'>You have already account ? <Link to={"/login"} className='text-blue-600 hover:text-blue-800 hover:underline'>Login</Link></p>

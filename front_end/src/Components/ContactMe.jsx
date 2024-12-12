@@ -10,7 +10,7 @@ function ContactMe() {
   }
   const navigate=useNavigate()
   const [messageData,setMessageData]=useState(initialData)
-    
+  const [loader,setLoader]=useState(false)  
   const handleOnChange=(e)=>{
     const {name,value}=e.target
     setMessageData((prev)=>{
@@ -23,14 +23,17 @@ function ContactMe() {
   }
   const handleSubmit=async(e)=>{
      e.preventDefault()
+     setLoader(true)
      try {
       const response=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/message/user_message`,messageData)
       toast.success(response?.data?.message)
+      setLoader(false)
       navigate("/")
       console.log(response)
      } catch (error) {
        console.error("error while send message to developer",error)
        toast.error("message not sent to developer")
+       setLoader(false)
      }
   }
   return (
@@ -51,8 +54,18 @@ function ContactMe() {
                   <input type="text" id='message' name='message' value={messageData.message} placeholder='Enter Your Name' required className='p-2 border-b' onChange={handleOnChange}/>
                 </div>
                 <div className='w-full h-12 flex justify-center items-center'>
-                  <button className='text-lg font-bold bg-[#009973] p-2 px-4 w-32 text-white rounded'>Submit</button>
-                  <Toaster/>
+
+                 {
+                  loader ? (
+                     <div className="w-full p-2 border rounded bg-[#009973]">
+                        <div className="w-full flex justify-center items-center">
+                           <div className="p-3 text-center  border-b border-b-white rounded-full animate-spin"></div>
+                        </div>
+                     </div>
+                  ) : (
+                    <button className='text-lg font-bold bg-[#009973] p-2 px-4 w-32 text-white rounded'>Submit</button>
+                  )
+                 }
                 </div>
             </form>
           

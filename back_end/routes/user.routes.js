@@ -7,6 +7,7 @@ import {
     logOut,
     allUser,
     updateUser,
+    deleteUser,
     countAddToCartProduct,
     viewAddToCartProduct,
     updateAddToCartProduct,
@@ -47,6 +48,9 @@ router.route("/update_addtocart_product").post(authorizedUser,updateAddToCartPro
 
 // delete addToCart product
 router.route("/delete_addtocart_product").post(authorizedUser,removeAddToCartProduct)
+
+// delete user
+router.route("/delete_user/:_id").delete(authorizedUser,authorized_Role("ADMIN"),deleteUser)
 
 
 export {router}

@@ -3,8 +3,8 @@ import {AsyncHandler} from "../utils/AsyncHandler.js"
 import {ApiResponse} from "../utils/ApiResponse.js"
 import {ApiError} from "../utils/ApiError.js"
 import {AddToCart} from "../models/cartProduct.model.js"
-
-
+import { Resend } from 'resend'; 
+const resend=new Resend('re_7y3HANTo_2QmRpsXRUtCcyVYhh3csSZLa')
 
 // generate access and refresh token
 const generateAccessTokenAndRefreshToken=async(userId)=>{
@@ -51,8 +51,21 @@ const signUp=AsyncHandler(async(req,res,)=>{
         password,
         profilePic
     })
-
-    console.log("user:",user)
+     const sendSignUpEmail = async () => {
+        try {
+          const response = await resend.emails.send({
+            from: 'mahtabh667@gmail.com',
+            to: `${email}`,
+            subject: 'SignUp Mail',
+            html: '<p>You are successfull signup in my project mk-commerce</p>',
+          });
+          console.log('Email sent:', response);
+        } catch (error) {
+          console.error('Error sending email:', error);
+        }
+      };
+     sendSignUpEmail()
+    //console.log("user:",user)
 
     if(!user){
         throw new ApiError(404,"user not created")
@@ -211,6 +224,21 @@ const updateUser=AsyncHandler(async(req,res)=>{
    .status(200)
    .json(new ApiResponse(200,updatedFields,"user detail updated successfully"))
 })
+
+// delete user
+const deleteUser=AsyncHandler(async(req,res)=>{
+    const userId=req?.params._id
+    if(!userId){
+        throw new ApiError(404,"userId not found!")
+    }
+    const deleted_user=await User.findByIdAndDelete(userId)
+    if(!deleted_user){
+        throw new ApiError(500,"user not deleted!")
+    }
+    return res
+    .status(200)
+    .json(new ApiResponse(200,deleted_user,"user deleted successfully"))
+})
  
 // count add to cart products
 const countAddToCartProduct=AsyncHandler(async(req,res)=>{
@@ -310,6 +338,7 @@ export {
     logOut,
     allUser,
     updateUser,
+    deleteUser,
     countAddToCartProduct,
     viewAddToCartProduct,
     updateAddToCartProduct,

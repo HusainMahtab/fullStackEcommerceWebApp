@@ -186,8 +186,8 @@ function BuyProducts() {
         </div>
         ) : (
         <div className='w-full grid justify-center place-content-center p-3 gap-4'>
-         <div className='flex gap-2 p-4 '>
-           <div className='p-2 bg-slate-200 flex justify-center items-center'>
+         <div className='flex gap-6 p-4 bg-[#8876]'>
+           <div className='p-2 bg-slate-200 flex justify-center rounded items-center'>
              <img src={ProductData?.productImage[0]} alt={ProductData?.productName} className='w-[350px] h-[150px] md:w-[200px] md:h-[200px] mix-blend-multiply' />
            </div>
            <div className='grid'>

@@ -15,7 +15,7 @@ import Context from '../context';
 function VerticalProductCart({category,heading}) {
     const [product,setProduct]=useState([])
     const [loading,setLoading]=useState(true)
-    const [scrollProduct,setScrollProduct]=useState(0)
+    const [loader,setLoader]=useState(false)
     const scrollElement=useRef()
     const user=useSelector(state=>state?.user?.user)
     const loadingList=new Array(14).fill(null)
@@ -45,8 +45,16 @@ function VerticalProductCart({category,heading}) {
       scrollElement.current.scrollLeft-=300
     }
     const handleAddToCart=async(e,_id,user)=>{
-      await addToCart(e,_id,user)
-      await countAddToCartItem()
+      setLoader((prev)=>({...prev,[_id]:true}))
+      try {
+        await addToCart(e,_id,user)
+        await countAddToCartItem()
+        setLoader((prev)=>({...prev,[_id]:false}))
+      } catch (error) {
+        console.error("error whilte add to cart product",error)
+      }finally{
+        setLoader((prev)=>({...prev,[_id]:false}))
+      }
     }
     const handleNavigate=(e,_id)=>{
       e?.preventDefault();
@@ -116,7 +124,15 @@ function VerticalProductCart({category,heading}) {
                        </div>
                       
                       <div className="flex gap-4 py-4">
-                         <button className='px-3 py-1 border-2 border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white rounded-lg font-bold text-lg' onClick={(e)=>handleAddToCart(e,ele?._id,user)}>Add to Cart</button>
+                        {
+                          loader[ele?._id] ? (
+                            <div className="w-[130px] h-12 rounded-lg border-2 bg-gray-600 flex justify-center items-center">
+                              <div className="p-2 border-b border-b-white rounded-full animate-spin"></div>
+                            </div>
+                          ) : (
+                              <button className='px-3 py-1 border-2 border-gray-600 text-gray-600 hover:bg-gray-600 hover:text-white rounded-lg font-bold text-lg' onClick={(e)=>handleAddToCart(e,ele?._id,user)}>Add to Cart</button>    
+                          )
+                        }
                          <button className='px-3 py-1 border-2 border-gray-600 bg-gray-600 text-white hover:bg-gray-700 rounded-lg font-bold text-lg' onClick={(e)=>handleNavigate(e,ele?._id)}>Buy Now</button> 
                       </div>
                     

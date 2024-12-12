@@ -1,6 +1,6 @@
 import React, { useEffect, useState,useContext } from 'react'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { IoIosStar } from "react-icons/io";
 import { IoIosStarHalf } from "react-icons/io";
 import displayINRCurrency from "../helpers/displayCurrencyThemes"
@@ -14,6 +14,9 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { FaRegComment } from "react-icons/fa6";
 import { IoMdSend } from "react-icons/io";
+import { IoStarOutline } from "react-icons/io5";
+import toast from 'react-hot-toast';
+import ProductComments from '../Components/ProductComments';
 
 function ProductDetails() {
   const [data,setData]=useState({
@@ -28,9 +31,19 @@ function ProductDetails() {
     stock:"",
     ratings:"",
     numOfReviews:"",
-    reviews:[]
+    productComment:[],
+    productRating:[],
+    productLike:[]
   })
 
+  const initialCommentData={
+    user:"",
+    userName:"",
+    comment:"",
+  }
+  const [commentData,setCommentData]=useState(initialCommentData)
+  const [showAllComments,setShowAllComments]=useState([])
+  const [openComment,setOpenComment]=useState(false)
   const [loading,setLoading]=useState(true)
   const params=useParams()
   const [changeImageURl,setChangeImageURl]=useState("")
@@ -43,7 +56,19 @@ function ProductDetails() {
   const [showMore,setShowMore]=useState(false)
   const descriptionToggleLength=100
   const [showCommentInput,setShowCommentInput]=useState(false)
-  //console.log("product id ",params)
+  const [likeData,setLikeData]=useState({
+    user:"",
+    userName:"",
+    like:false
+  })
+  const [allLikes,setAllLikes]=useState([])
+  const [hoveredStar, setHoveredStar] = useState(0); 
+  const [ratings, setRating] = useState(0);
+  const [ratingData,setRatingData]=useState({
+    user:"",
+    userName:"",
+    rating:""
+  })
 
   const fetchedProductDetails=async()=>{
     try {
@@ -96,6 +121,89 @@ const handleShowMore=()=>{
 const handleShowCommentInput=()=>{
   setShowCommentInput(true)
 }
+
+const handleCommentChange=(e)=>{
+  const {name,value}=e.target
+  setCommentData((pre)=>{
+    return{
+      ...pre,
+      [name]:value
+    }
+  })
+  //console.log("comment",value)
+}
+
+const handleCommentSubmit=async()=>{
+  try {
+    const commentResponse=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/products/create_comment/${data._id}`,commentData,{withCredentials:true})
+    //console.log("comment resposnse",commentResponse)
+    toast.success("comment send successfully")
+    setCommentData(initialCommentData)
+  } catch (error) {
+    console.error("error white comment product",error)
+    toast.error(error?.message)
+  }
+}
+
+const getAllComments=async()=>{
+  try {
+    const response=await axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/products/get_comments/${data?._id}`)
+    console.log("all comments",response.data.data)
+    setShowAllComments(response.data?.data)
+  } catch (error) {
+    console.error("error while fetch product comments",error)
+  }
+}
+
+useEffect(() => {
+  if (data?._id) {
+    getAllComments();
+  }
+}, [data?._id]);
+
+const handleLikeProduct = async () => {
+  try {
+    setLikeData((prevState) => ({ like: !prevState.like }));
+    const LikeResponse = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/api/v1/products/create_like/${data._id}`,
+      { like: !likeData.like }, // Sending updated like value
+      { withCredentials: true }
+    );
+    console.log("Like response", LikeResponse);
+  } catch (error) {
+    console.error("Error while liking the product!", error);
+  }
+};
+
+
+const getProductLikes=async()=>{
+  try {
+    const response=await axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/products/get_all_likes/${data._id}`)
+    console.log("like response",response)
+    setAllLikes(response.data?.data)
+  } catch (error) {
+    console.error("error while fetching all products likes",error)
+  }
+}
+
+useEffect(()=>{
+   if(data._id){
+    getProductLikes()
+   }
+},[data?._id])
+
+const handlePostRatings=async(value)=>{
+  setRatingData(value)
+  console.log("rating data",ratingData)
+  try {
+    await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/products/create_rating/${data._id}`,ratingData,{withCredentials:ture})
+    toast.success("rating posted successfully")
+  } catch (error) {
+    console.error("error while post ratings",error)
+    toast.error("rating not post!")
+  }
+}
+
 
 //console.log("data",data)
   return (
@@ -226,20 +334,39 @@ const handleShowCommentInput=()=>{
                   )
                 }
               </div>
-              <div className="">
-                 <div className='flex gap-4'>
-                  <div className='flex justify-center items-center gap-1 cursor-pointer'>
-                     <FaRegHeart className='text-lg'/>
-                     <p>Like</p>
-                  </div>
-                  <div onClick={handleShowCommentInput} className='flex justify-center items-center gap-1 cursor-pointer'>
-                    <FaRegComment className='text-lg'/>
-                    <p>Comment</p>
+              <div className="" >
+                 <div className='grid place-content-center place-items-center md:flex gap-4 justify-center items-center'>
+                   <div className="flex justify-center items-center gap-2">
+                      {/* Hidden checkbox */}
+                      <input
+                       type="checkbox"
+                       id="heart-checkbox"
+                       className="hidden"
+                       readOnly
+                     />
+
+                   {/* Custom heart icon */}
+                   <label
+                    htmlFor="heart-checkbox"
+                    className={`cursor-pointer text-3xl ${
+                    likeData.like ? "text-red-500" : "text-black"
+                    }`}
+                    onClick={handleLikeProduct}
+                   >
+                   {likeData.like ? <FaHeart /> : <FaRegHeart />}
+                   </label>
+                    <h1 className="text-xl">{data?.productLike.length}</h1>
+                   </div>
+                  <div onClick={handleShowCommentInput} className='grid md:flex justify-center items-center gap-1 cursor-pointer'>
+                      <div className='flex gap-1 justify-center items-center'>
+                        <FaRegComment className='text-2xl'/>
+                        <p className='text-xl font-semibold'>Comment</p>
+                      </div>
                     {
                       showCommentInput&&(
-                        <div className='flex justify-center items-center'>
-                         <input type="text" placeholder='Write a comment...' autoFocus className='p-[3px] outline-none  text-lg border border-blue-600'/>
-                         <div className='p-2 flex justify-center items-center bg-blue-600 text-white text-xl font-bold hover:bg-blue-500'>
+                        <div className='flex justify-center items-center' >
+                         <input type="text" name='comment' value={commentData.comment} onChange={handleCommentChange} placeholder='Write a comment...' autoFocus className='p-[3px] outline-none  text-lg border border-blue-600'/>
+                         <div onClick={handleCommentSubmit} className='p-2 flex justify-center items-center bg-blue-600 text-white text-xl font-bold hover:bg-blue-500'>
                           <IoMdSend/>
                          </div>
                         </div>
@@ -247,11 +374,52 @@ const handleShowCommentInput=()=>{
 
                     }
                   </div>
+                <div className="flex justify-center items-center gap-1">
+                 <p className="text-xl font-semibold">Rate</p>
+                <div className="flex justify-center items-center gap-2 font-bold text-xl">
+                 {Array(5)
+                 .fill(0)
+                 .map((_, index) => (
+                <div
+                  key={index}
+                  className={`cursor-pointer p-2 duration-500 rounded-full ${
+                  index < hoveredStar || index < ratings
+                  ? 'bg-gray-600 text-white'
+                  : 'bg-gray-200 text-black'
+                 }`}
+                  onMouseEnter={() => setHoveredStar(index + 1)} // Updates hovered star
+                  onMouseLeave={() => setHoveredStar(0)} // Resets hover state
+                  onClick={()=>handlePostRatings(index + 1)} // Sets the rating
+                >  
+                <IoStarOutline />
+               </div>
+               ))}
+              </div>
+            </div>
                  </div>
               </div>
              </div>
               )
             }
+       </div>
+       <div>
+        <h1 className='w-[100px] p-2 font-bold mt-4'>Reviews:<span className="p-2">{showAllComments.length}</span></h1>
+         {
+          showAllComments.length===0 ? (<div className="w-full h-[50px] p-2 shadow-md text-lg">No Comments</div>) : (
+            <Link onClick={()=>setOpenComment(true)}>
+                <div className="p-2 w-full bg-purple-500 rounded">
+                    <div>
+                      <div className='flex items-center gap-2'>
+                        <p className='text-lg font-bold text-white '>{showAllComments[0]?.userName}</p>
+                        <p>{showAllComments[0]?.rating}</p>
+                      </div>
+                      <p className='text-white'>{showAllComments[0]?.comment}</p>
+                    </div>
+                </div>
+            </Link>
+          )
+         } 
+        
        </div>
       <div className="pt-4">
        {
@@ -260,6 +428,11 @@ const handleShowCommentInput=()=>{
         )
         }
       </div>
+      {
+        openComment&& (
+          <ProductComments ProductId={data?._id} onClose={()=>setOpenComment(false)}/>
+        )
+      }
       
     </div>
     

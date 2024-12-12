@@ -251,56 +251,154 @@ const filterProduct=AsyncHandler(async(req,res)=>{
     .json(new ApiResponse(200,product,"products found successfully"))
 })
 
-// create product reviews
-const createProductReviews = AsyncHandler(async (req, res) => {
-  const user = req.user._id;
-  if (!user) {
-    throw new ApiError(404, "User not found!");
-  }
-  const productId = req.params._id;
-  if (!productId) {
-    throw new ApiError(404, "Product ID not found!");
-  }
-  const { rating, comment } = req.body;
-  if (!rating) {
-    throw new ApiError(400, "Rating is required!");
-  }
-  if (!comment) {
-    throw new ApiError(400, "Comment is required!");
-  }
-  const product = await Product.findById(productId);
-  if (!product) {
-    throw new ApiError(404, "Product not found!");
-  }
-  // Check if the user has already reviewed this product
-  const alreadyReviewed = product.reviews.find(
-    (review) => review.user.toString() === user.toString()
-  );
-  if (alreadyReviewed) {
-    throw new ApiError(400, "You have already reviewed this product!");
-  }
-  // Add the review
-  const review = {
-    user,
-    userName: req.user.userName,
-    rating: Number(rating),
-    comment,
-  };
-  product.reviews.push(review);
-  // Update ratings and number of reviews
-  product.numOfReviews = product.reviews.length;
-  product.ratings =
-    product.reviews.reduce((acc, review) => acc + review.rating, 0) /
-    product.reviews.length;
-  // Save the product
-  await product.save();
-  res.status(201).json({
-    success: true,
-    message: "Review added successfully!",
-    product,
-  });
-});
+// create product comment
+const productComment=AsyncHandler(async(req,res)=>{
+    const user=req.user?._id
+    const userName=req.user?.userName
+    if(!user){
+        throw new ApiError(404,"user not found!")
+    }
+    const comment=req.body.comment
+    if(!comment){
+        throw new ApiError(404,"comment not found!")
+    }
+    if(!userName){
+        throw new ApiError(404,"userName not found!")
+    }
+    const productId=req.params._id
+    if(!productId){
+        throw new ApiError(404,"productId not found!")
+    }
+    console.log("productid",productId)
+    const product=await Product.findById(productId)
+    console.log("product",product)
+    if(!product){
+        throw new ApiError(500,"product not found in Data base")
+    }
+    product.productComments.push({
+       user,
+       userName,
+       comment
+    })
+    await product.save()
+    return res
+    .status(200)
+    .json(new ApiResponse(200,product,"comment created successfully"))
+})
 
+// get comments
+const getComments=AsyncHandler(async(req,res)=>{
+   const productId=req?.params._id
+   console.log("_id pp",productId)
+   if(!productId){
+    throw new ApiError(404,"productId not found!")
+   }
+   const product=await Product.findById(productId)
+   if(!product){
+    throw new ApiError(500,"product not found in database")
+   }
+   const product_comment=product.productComments
+   //console.log("projectComment",product_comment)
+
+   return res
+   .status(200)
+   .json(new ApiResponse(200,product_comment,"comment found successfully"))
+   
+})
+
+const createRatings=AsyncHandler(async(req,res)=>{
+   const productId=req?.params._id
+   const user=req?.user._id
+   if(!user){
+    throw new ApiError(404,"user Id not found!")
+   }
+   const userName=req?.user.userName
+   if(!userName){
+    throw new ApiError(404,"userName is required")
+   }
+   const rating=req.body.rating
+   if(!rating){
+    throw new ApiError(404,"rating is required")
+   }
+   const product =await Product.findById(productId)
+   if(!product){
+    throw new ApiError(500,"product not found in DB")
+   }
+   if(product.productRating){
+     throw new ApiError(500,"already rated the project")
+   }
+   product.productRating.push({
+    user,
+    userName,
+    rating:Number(rating)
+   })
+   await product.save()
+   return res
+   .status(200)
+   .json(new ApiResponse(200,product,"rating created successfully"))
+})
+
+const getRating=AsyncHandler(async(req,res)=>{
+    const productId=req.params._id
+    if(!productId){
+        throw new ApiError(404,"productId not found!")
+    }
+    const product=await Product.findById(productId)
+    if(!product){
+        throw new ApiError(500,"product not found in DB")
+    }
+    const productRatings=product.productRating
+    return res
+    .status(200)
+    .json(new ApiResponse(200,productRatings,"rating found successfully"))
+})
+
+const likeProduct=AsyncHandler(async(req,res)=>{
+    const productId=req.params._id
+    if(!productId){
+        throw new ApiError(404,"productId not found!")
+    }
+    const user=req?.user._id
+    if(!user){
+        throw new ApiError(404,"userId not found!")
+    }
+    const userName=req?.user.userName
+    if(!userName){
+        throw new ApiError(404,"userName is required")
+    }
+    const like=req.body.like
+    if(!like){
+        throw new ApiError(404,"like is required")
+    }
+    const product=await Product.findById(productId)
+    if(!product){
+        throw new ApiError(500,"product not found in DB")
+    }
+    product.productLike.push({
+        user,
+        userName,
+        like:Boolean(like)
+    })
+    await product.save()
+    return res
+    .status(200)
+    .json(new ApiResponse(200,product,"like created successfully"))
+})
+
+const getallLikes=AsyncHandler(async(req,res)=>{
+    const productId=req.params._id
+    if(!productId){
+        throw new ApiError(404,"productId not found!")
+    }
+    const product=await Product.findById(productId)
+    if(!product){
+        throw new ApiError(404,"product not found is DB")
+    }
+    const productLikes=product.productLike
+    return res
+    .status(200)
+    .json(new ApiResponse(200,productLikes,"product likes fetched successfully"))
+})
 
 export {
     createProduct,
@@ -312,6 +410,11 @@ export {
     getProductDetails,
     searchProduct,
     filterProduct,
-    createProductReviews
+    productComment,
+    getComments,
+    createRatings,
+    getRating,
+    likeProduct,
+    getallLikes
 }
 

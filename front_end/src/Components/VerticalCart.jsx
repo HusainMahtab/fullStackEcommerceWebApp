@@ -7,15 +7,26 @@ import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import addToCart from "../helpers/addToCart"
 import scrollTop from '../helpers/scrollTop'
+import { useState } from 'react'
 function VerticalCart({loading,data=[]}) { 
   
     const loadingList=new Array(14).fill(null)
     const user=useSelector(state=>state?.user?.user)
     const {countAddToCartItem}=useContext(Context)
+    const [loader,setLoader]=useState(false)
     const navigate=useNavigate()
     const handleAddToCart=async(e,_id,user)=>{
+       try {
+        setLoader((prev)=>({...prev,[_id]:true}))
         await addToCart(e,_id,user)
         await countAddToCartItem()
+       } catch (error) {
+        console.error(error)
+       }finally{
+          setLoader((prev)=>({...prev,[_id]:false}))
+       }
+
+       
       }
       const handleNavigate=(e,_id)=>{
       e?.preventDefault();
@@ -71,7 +82,7 @@ function VerticalCart({loading,data=[]}) {
                 <div className="px-4">
                    <div className='w-full flex justify-between items-center pt-6'>
                       <h2 className='text-lg md:font-medium font-base text-ellipsis line-clamp-1 text-black'>{ele?.productName}</h2>
-                      <div className='w-12 h-12 mx-4 rounded-full bg-yellow-800 text-white flex justify-center items-center text-sm'>
+                      <div className='w-12 h-12 mx-4 rounded-full bg-gray-600 text-white flex justify-center items-center text-sm'>
                         <p className='font-bold grid place-items-center'>{((ele?.price - ele?.sellingPrice) / ele?.price * 100).toFixed(1)}%<p>OOF</p></p>
                       </div> 
                    </div>                      
@@ -82,8 +93,16 @@ function VerticalCart({loading,data=[]}) {
                    </div>
                   
                   <div className="flex gap-4 py-4">
-                     <button className='px-3 py-1 border-2 border-yellow-800 text-yellow-800 hover:bg-yellow-800 hover:text-white rounded-lg font-bold text-lg' onClick={(e)=>handleAddToCart(e,ele?._id,user)}>Add to Cart</button>
-                     <button className='px-3 py-1 border-2 border-yellow-800 bg-yellow-800 text-white hover:bg-yellow-700 rounded-lg font-bold text-lg' onClick={(e)=>handleNavigate(e,ele?._id)}>Buy Now</button> 
+                     {
+                      loader[ele?._id] ? (
+                        <div className="w-[130px] h-12 rounded-lg border-2 bg-gray-600 flex justify-center items-center">
+                           <div className="p-2 border-b border-b-white rounded-full animate-spin"></div>
+                        </div>
+                      ) : (
+                        <button className='px-3 py-1 border-2 border-gray-600 text-gray-600 hover:bg-gray-700 hover:text-white rounded-lg font-bold text-lg' onClick={(e)=>handleAddToCart(e,ele?._id,user)}>Add to Cart</button>  
+                      )
+                     }
+                     <button className='px-3 py-1 border-2 border-gray-600 bg-gray-600 text-white hover:bg-gray-700 rounded-lg font-bold text-lg' onClick={(e)=>handleNavigate(e,ele?._id)}>Buy Now</button> 
                   </div>
                 
                 </div>

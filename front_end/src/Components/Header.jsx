@@ -23,16 +23,19 @@ const user=useSelector(state=>state?.user?.user)
  const URLSearch=new URLSearchParams(mobileSearchInput?.search)
  const searhQuery=URLSearch.getAll("q")
  const [mobileSearch,setMobileSearch]=useState(searhQuery)
-
+ const [loader,setLoader]=useState(false)
  const handleLogout=async()=>{
+      setLoader(true)
       try {
       const logOutApi=await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/users/log_out`,{},{withCredentials:true})   
-        dispatch(setUserDetails(null))
+        dispatch(setUserDetails(null)) 
+        setLoader(false)
         toast.success(`${logOutApi?.data?.message}`)
         navigate("/")
       } catch (error) {
         console.log("error while logout the user",error)
         toast.error("user does't logOut")
+        setLoader(false)
       }
   }
 
@@ -114,7 +117,17 @@ const user=useSelector(state=>state?.user?.user)
          
           <div className='flex justify-center items-center gap-2'>
            {
-            user?._id ? (<button onClick={handleLogout} className='px-3 bg-red-700 py-1 rounded-full text-white text-xs hover:bg-red-600'>LogOut</button>)
+            user?._id ? (<div>
+                {
+                  loader ? (
+                    <div className="flex justify-center items-center">
+                       <div className='flex justify-center items-center w-20 p-2 bg-red-600 rounded-full'>
+                         <div className='p-2 rounded-full border-b border-b-white animate-spin'></div>
+                       </div>
+                    </div>
+                  ) : (<button onClick={handleLogout} className='px-3 bg-red-700 py-1 rounded-full text-white text-xs hover:bg-red-600'>LogOut</button>)
+                }
+            </div>)
             :(<Link to={"/login"} className='p-2 text-white font-bold bg-gray-600 rounded hover:bg-gray-500'> Login</Link>)
                
            }

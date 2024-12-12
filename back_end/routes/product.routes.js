@@ -9,7 +9,12 @@ import {
     getProductDetails,
     searchProduct,
     filterProduct,
-    createProductReviews
+    productComment,
+    getComments,
+    createRatings,
+    getRating,
+    likeProduct,
+    getallLikes
 } from "../controllers/product.controller.js"
 import {authorizedUser,authorized_Role} from "../middlewares/verifyJWT.js"
 
@@ -43,7 +48,23 @@ router.route("/search-products").get(searchProduct)
 router.route("/filterProduct").get(filterProduct)
 
 // create prduct reviews
-router.route("/create_review/:_id").post(authorizedUser,createProductReviews)
+router.route("/create_comment/:_id").post(authorizedUser,productComment)
+
+// get comment 
+router.route("/get_comments/:_id").get(getComments)
+
+// create ratings
+router.route("/create_rating/:_id").post(authorizedUser,createRatings)
+
+// get ratings
+router.route("/get_rating/:_id").get(getRating)
+
+// create like
+router.route("/create_like/:_id").post(authorizedUser,likeProduct)
+
+// get all likes
+router.route("/get_all_likes/:_id").get(getallLikes)
+
 
 
 export default router
