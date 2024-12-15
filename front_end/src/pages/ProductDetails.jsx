@@ -409,8 +409,9 @@ const handlePostRatings=async(value)=>{
             <Link onClick={()=>setOpenComment(true)}>
                 <div className="p-2 w-full bg-purple-500 rounded">
                     <div>
+                      <p className='text-lg font-bold text-slate-200'>Comments {showAllComments.length}</p>
                       <div className='flex items-center gap-2'>
-                        <p className='text-lg font-bold text-white '>{showAllComments[0]?.userName}</p>
+                        <p className='text-lg font-semibold text-white '>{showAllComments[0]?.userName}</p>
                         <p>{showAllComments[0]?.rating}</p>
                       </div>
                       <p className='text-white'>{showAllComments[0]?.comment}</p>
