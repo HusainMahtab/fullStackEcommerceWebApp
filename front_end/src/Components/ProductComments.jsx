@@ -54,7 +54,7 @@ function ProductComments({ProductId,onClose}) {
        </div>
         <div className='h-[70vh] w-[280px] md:w-[800px] overflow-scroll overflow-x-hidden bg-white shadow-md rounded'>
           <div className='flex p-4 bg-white fixed md:w-[783px] shadow-lg z-20 justify-center items-center' >
-            <input type="text" name='comment' value={comments.comment} onChange={handleCommentChange} placeholder='Write a comment...' autoFocus className='p-[3px] md:w-[400px] outline-none  text-lg border border-blue-600'/>
+            <input type="text" name='comment' value={comments.comment} onChange={handleCommentChange} placeholder='Write a comment...' required autoFocus className='p-[3px] w-full md:w-[400px] outline-none text-lg border border-blue-600'/>
                 <div onClick={handleCommentSubmit} className='p-2 flex justify-center items-center bg-blue-600 text-white text-xl font-bold hover:bg-blue-500'>
                     <IoMdSend/>
                 </div>
