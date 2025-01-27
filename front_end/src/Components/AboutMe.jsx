@@ -2,7 +2,7 @@ import React from 'react'
 function AboutMe() {
   return (
     <div className='w-full flex flex-col md:flex-row justify-center items-center p-8'>
-        <div className="w-full bg-[#00ff99] h-[400px] grid justify-center place-content-center p-4 shadow-lg">
+        <div className="w-full bg-green-700 h-[400px] grid justify-center place-content-center p-4 shadow-lg">
             <h1 className='text-2xl font-bold text-white text-center'>About Me</h1>
             <p className='text-lg font-semibold text-white font-serif p-4'>Hello,I'm Mahtab Husain Web developer with a keen eye for MERN Stack. with a background in IT,I strive to create impectful and visually stunning software solutios that leave a lasting impression.</p>
         </div>
