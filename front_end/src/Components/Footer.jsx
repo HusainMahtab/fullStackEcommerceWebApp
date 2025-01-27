@@ -24,7 +24,7 @@ function Footer() {
                 <Link to={"/contact_me"} className='text-md w-fit font-semibold text-white border-b-2 border-transparent hover:border-white transition-all duration-300' onClick={()=>scrollTop()}>
                   Contact-Me
                 </Link>
-                <Link onClick={()=>window.open("https://my-portfolio-v3ie.onrender.com/","_blank",)} className='text-md w-fit font-semibold text-white border-b-2 border-transparent hover:border-white transition-all duration-300'>
+                <Link onClick={()=>window.open("mahtab-husain-pf.onrender.com","_blank",)} className='text-md w-fit font-semibold text-white border-b-2 border-transparent hover:border-white transition-all duration-300'>
                   Portfolio
                 </Link>
                 <p className='font-bold'>+91 9118168704</p>
