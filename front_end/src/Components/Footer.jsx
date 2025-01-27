@@ -13,7 +13,7 @@ function Footer() {
             <div className="w-full grid justify-center place-content-center">
               <h2 className='text-xl font-bold font-serif'>Other Products</h2>
               <Link onClick={()=>window.open("https://school-website-theta-three.vercel.app/","_blank")} className='text-white font-semibold border-b-2 border-transparent hover:border-white transition-all duration-300 w-fit'>schoolwebSite</Link>
-              <Link onClick={()=>window.open("todowithmahtab.netlify.app","_blank")} className='text-white font-semibold border-b-2 border-transparent hover:border-white transition-all duration-300 w-fit'>todo-app</Link>
+              <Link onClick={()=>window.open("https://mahtab-husain-pf.onrender.com","_blank")} className='text-white font-semibold border-b-2 border-transparent hover:border-white transition-all duration-300 w-fit'>todo-app</Link>
               <Link onClick={()=>window.open("https://nimesh-portfolio-c40y.onrender.com/","_blank")} className='text-white font-semibold border-b-2 border-transparent hover:border-white transition-all duration-300 w-fit'>NimeshPortfolio</Link>
             </div>
              <div className="w-full grid gap-1 justify-center place-content-center">
